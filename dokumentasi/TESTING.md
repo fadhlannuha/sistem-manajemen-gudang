@@ -134,6 +134,8 @@ tests/
 | PRD-10 | `ProductCrudTest::test_staff_cannot_create_product` | staff POST | 403 |
 | PRD-11 | `ProductCrudTest::test_contract_can_return_deactivated_product_for_history` | delete + `findIncludingDeactivated` | snapshot tidak null |
 
+> **Status 2026-11-19:** PRD-01 sampai PRD-11 sudah diimplementasikan di `tests/Feature/Product/`. Tambahan test mencakup event produk, filter/pencarian contract, slug kategori, normalisasi kode satuan, delete guard untuk produk soft-deleted, seeder, dan RBAC staff. Total 32 test Product lulus.
+
 ### 4.3 Supplier
 
 | ID | Test | Skenario | Ekspektasi |

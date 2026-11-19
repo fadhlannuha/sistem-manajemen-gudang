@@ -1,6 +1,6 @@
 # Rencana Pengerjaan UTS — Backend Development (DT199)
 
-> Status: **M0 (fondasi) dan M1 (Auth & RBAC) selesai; modul M2–M5 belum dimulai.**
+> Status: **M0 (fondasi), M1 (Auth & RBAC), dan M2 (Product) selesai; modul M3–M5 belum dimulai.**
 > Semua panduan teknis ada di folder `dokumentasi/`. Baca `README.md` untuk peta dokumen.
 
 ## 1. Identitas dan Lingkup
@@ -115,6 +115,8 @@ Format ID: `AREA-NN`. Setiap item selesai harus punya commit dan bukti uji.
 | PRD-08 | `ProductCatalogContract`, `ProductSnapshot`, binding | Dipakai Inventory tanpa akses model Product |
 | PRD-09 | Event `ProductCreated`, `ProductUpdated`, `ProductDeactivated` | Event terkirim setelah commit; listener Inventory membuat saldo 0 |
 | PRD-10 | Blade views + komponen error/old input | Validasi gagal menampilkan error per field |
+
+> **Status M2:** ✅ selesai pada 2026-11-19. Migration, model, relasi 1:N/M:N, factory, seeder 5 kategori/5 satuan/20 produk, CRUD lengkap, Form Request, `ProductPolicy`, `ProductCatalogContract`, dan tiga event produk sudah berjalan. Bukti: `tests/Feature/Product/` (32 test) lulus, total suite 65 test / 287 assertions, `vendor/bin/pint --test` bersih. Listener saldo awal tetap menunggu M4.
 
 ### M3 — Supplier
 

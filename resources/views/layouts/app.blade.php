@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ isset($title) ? $title.' — ' : '' }}{{ config('app.name') }}</title>
+    <title>@hasSection('title')@yield('title') — @endif{{ config('app.name') }}</title>
 
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -36,6 +36,9 @@
             <nav class="flex items-center gap-4 text-sm">
                 @auth
                     <a href="{{ route('dashboard.index') }}" class="font-medium text-gray-700 hover:text-blue-700">Dashboard</a>
+                    <a href="{{ route('products.index') }}" class="font-medium text-gray-700 hover:text-blue-700">Barang</a>
+                    <a href="{{ route('categories.index') }}" class="font-medium text-gray-700 hover:text-blue-700">Kategori</a>
+                    <a href="{{ route('units.index') }}" class="font-medium text-gray-700 hover:text-blue-700">Satuan</a>
                     <span class="hidden text-gray-500 sm:inline">{{ auth()->user()->name }}</span>
 
                     @foreach (auth()->user()->roles as $role)
@@ -65,6 +68,17 @@
 
         @if (session('error'))
             <x-alert type="error" :message="session('error')" />
+        @endif
+
+        @if ($errors->any())
+            <div class="mb-4 rounded-lg bg-red-100 px-4 py-3 text-sm text-red-800" role="alert">
+                <p class="font-semibold">Periksa kembali input berikut:</p>
+                <ul class="mt-1 list-disc space-y-0.5 pl-5">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
         @endif
 
         @yield('content')

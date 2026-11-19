@@ -247,14 +247,14 @@ app/Modules/Product/
 
 ### 3.6 Acceptance
 
-- [ ] CRUD barang berfungsi; index/search/pagination rapi.
-- [ ] Kategori dan satuan CRUD; delete ditolak jika dipakai dengan pesan jelas.
-- [ ] Validasi SKU unik, unit wajib, min_stock >= 0, kategori array valid.
-- [ ] Relasi Unit 1:N dan Product M:N terbukti di test dan ERD.
-- [ ] Soft delete produk: hilang dari index; `find` null; method historis tetap mengembalikan data untuk kartu stok.
-- [ ] Staff tidak bisa create/edit/delete.
-- [ ] `ProductCreated` membuat saldo 0 di Inventory.
-- [ ] Tidak ada akses model Product dari Inventory/Reporting.
+- [x] CRUD barang berfungsi; index/search/pagination rapi.
+- [x] Kategori dan satuan CRUD; delete ditolak jika dipakai dengan pesan jelas.
+- [x] Validasi SKU unik, unit wajib, min_stock >= 0, kategori array valid.
+- [x] Relasi Unit 1:N dan Product M:N terbukti di test dan ERD.
+- [x] Soft delete produk: hilang dari index; `find` null; method historis tetap mengembalikan data untuk kartu stok.
+- [x] Staff tidak bisa create/edit/delete.
+- [ ] `ProductCreated` membuat saldo 0 di Inventory (menunggu listener Inventory di M4).
+- [ ] Tidak ada akses model Product dari Inventory/Reporting (diverifikasi saat M4–M5).
 
 ## 4. SupplierModule
 
