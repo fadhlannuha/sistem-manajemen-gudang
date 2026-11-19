@@ -333,13 +333,13 @@ app/Modules/Supplier/
 
 ### 4.6 Acceptance
 
-- [ ] CRUD pemasok + termin berfungsi.
-- [ ] Relasi PaymentTerm 1:N Supplier terbukti.
-- [ ] Delete termin ditolak jika dipakai.
-- [ ] Soft delete pemasok tidak merusak dokumen lama; nama pemasok lama diambil lewat method historis contract.
-- [ ] Staff tidak bisa create/edit/delete.
-- [ ] Contract dipakai Inventory tanpa model Supplier.
-- [ ] Event tercatat di Reporting.
+- [x] CRUD pemasok + termin berfungsi.
+- [x] Relasi PaymentTerm 1:N Supplier terbukti.
+- [x] Delete termin ditolak jika dipakai.
+- [x] Soft delete pemasok tidak merusak dokumen lama; nama pemasok lama diambil lewat method historis contract.
+- [x] Staff tidak bisa create/edit/delete.
+- [ ] Contract dipakai Inventory tanpa model Supplier (diverifikasi saat M4).
+- [ ] Event tercatat di Reporting (menunggu M5).
 
 ## 5. InventoryModule
 

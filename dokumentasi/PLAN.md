@@ -1,6 +1,6 @@
 # Rencana Pengerjaan UTS — Backend Development (DT199)
 
-> Status: **M0 (fondasi), M1 (Auth & RBAC), dan M2 (Product) selesai; modul M3–M5 belum dimulai.**
+> Status: **M0 (fondasi), M1 (Auth & RBAC), M2 (Product), dan M3 (Supplier) selesai; modul M4–M5 belum dimulai.**
 > Semua panduan teknis ada di folder `dokumentasi/`. Baca `README.md` untuk peta dokumen.
 
 ## 1. Identitas dan Lingkup
@@ -130,6 +130,8 @@ Format ID: `AREA-NN`. Setiap item selesai harus punya commit dan bukti uji.
 | SUP-06 | Policy + route admin untuk tulis | Staff 403 |
 | SUP-07 | `SupplierDirectoryContract`, `SupplierSnapshot`, binding | Dipakai Inventory dan Reporting |
 | SUP-08 | Event `SupplierCreated/Updated/Deactivated` | Reporting mencatat activity log |
+
+> **Status M3:** ✅ selesai pada 2026-11-19. Migration, model, relasi 1:N PaymentTerm→Supplier, factory, seeder 4 termin/5 pemasok, CRUD pemasok + termin, Form Request, `SupplierPolicy`, `SupplierDirectoryContract`, dan tiga event pemasok sudah berjalan. Bukti: `tests/Feature/Supplier/` (22 test) lulus, total suite 87 test / 402 assertions, `vendor/bin/pint --test` bersih. Pemakaian contract oleh Inventory dan activity log Reporting menunggu M4–M5.
 
 ### M4 — Inventory
 

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Modules\Auth\Database\Seeders\RoleSeeder;
 use App\Modules\Auth\Database\Seeders\UserSeeder;
 use App\Modules\Product\Database\Seeders\ProductSeeder;
+use App\Modules\Supplier\Database\Seeders\SupplierSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -21,6 +22,7 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             UserSeeder::class,
             ProductSeeder::class,
+            SupplierSeeder::class,
         ]);
     }
 }

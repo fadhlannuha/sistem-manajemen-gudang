@@ -33,12 +33,14 @@
                 {{ config('app.name') }}
             </a>
 
-            <nav class="flex items-center gap-4 text-sm">
+            <nav class="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
                 @auth
                     <a href="{{ route('dashboard.index') }}" class="font-medium text-gray-700 hover:text-blue-700">Dashboard</a>
                     <a href="{{ route('products.index') }}" class="font-medium text-gray-700 hover:text-blue-700">Barang</a>
                     <a href="{{ route('categories.index') }}" class="font-medium text-gray-700 hover:text-blue-700">Kategori</a>
                     <a href="{{ route('units.index') }}" class="font-medium text-gray-700 hover:text-blue-700">Satuan</a>
+                    <a href="{{ route('suppliers.index') }}" class="font-medium text-gray-700 hover:text-blue-700">Pemasok</a>
+                    <a href="{{ route('payment-terms.index') }}" class="font-medium text-gray-700 hover:text-blue-700">Termin</a>
                     <span class="hidden text-gray-500 sm:inline">{{ auth()->user()->name }}</span>
 
                     @foreach (auth()->user()->roles as $role)

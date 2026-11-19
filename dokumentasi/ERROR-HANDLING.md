@@ -107,6 +107,7 @@ public function rules(): array
 
 - Category `name` unik secara case-insensitive (dicek dengan closure `LOWER(name)` karena `Rule::unique` biasa bersifat case-sensitive di SQLite); slug dibuat otomatis dari name, bukan input.
 - Unit `code` dinormalisasi uppercase di `prepareForValidation()`, unik; `name` unik secara case-insensitive dengan pola yang sama.
+- Payment term `name` unik secara case-insensitive dengan pola closure yang sama; `days` 0–365.
 - `authorize()` admin.
 
 **ProductFilterRequest** (index)

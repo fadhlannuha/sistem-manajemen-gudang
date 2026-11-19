@@ -1,6 +1,6 @@
 # Checklist Kepatuhan UTS
 
-Gunakan dokumen ini sebagai kontrol terakhir sebelum submit. Kolom **Status** mengacu pada bukti nyata. M0 (fondasi), M1 (Auth & RBAC), dan M2 (Product) sudah selesai; modul M3–M5 belum diimplementasikan. Setelah coding, ubah status menjadi ✅ hanya jika bukti nyata ada.
+Gunakan dokumen ini sebagai kontrol terakhir sebelum submit. Kolom **Status** mengacu pada bukti nyata. M0 (fondasi), M1 (Auth & RBAC), M2 (Product), dan M3 (Supplier) sudah selesai; modul M4–M5 belum diimplementasikan. Setelah coding, ubah status menjadi ✅ hanya jika bukti nyata ada.
 
 Legenda: ✅ selesai/tersedia · ⬜ belum · 🔍 perlu verifikasi · N/A tidak berlaku.
 
@@ -14,7 +14,7 @@ Legenda: ✅ selesai/tersedia · ⬜ belum · 🔍 perlu verifikasi · N/A tidak
 | 1.1.2 | Setiap modul punya Service Provider | 5 provider | Screenshot provider; `bootstrap/providers.php` | ✅ (M0) |
 | 1.1.3 | Provider memakai `loadMigrationsFrom` | Semua provider | Screenshot kode | ✅ (M0) |
 | 1.1.4 | Provider memakai `loadRoutesFrom` | Route web/API sesuai modul | Screenshot kode; `route:list` | ✅ (M0) |
-| 1.1.5 | Komunikasi antar modul via Contract/Event | 4 contract + 10 event | `CONTRACTS.md`; screenshot interface/binding | 🟡 (2/4 contract, 4/10 event: Auth + Product) |
+| 1.1.5 | Komunikasi antar modul via Contract/Event | 4 contract + 10 event | `CONTRACTS.md`; screenshot interface/binding | 🟡 (3/4 contract, 7/10 event: Auth + Product + Supplier) |
 | 1.1.6 | Tidak ada akses model/tabel lintas modul | 0 pelanggaran | `grep`/architecture test; review | ⬜ |
 | 1.1.7 | Tidak ada query `DB::table()` lintas modul | 0 pelanggaran | Review kode | ⬜ |
 | 1.1.8 | Modul tidak saling bergantung secara melingkar | Acyclic | Diagram dependensi | ⬜ |
@@ -23,14 +23,14 @@ Legenda: ✅ selesai/tersedia · ⬜ belum · 🔍 perlu verifikasi · N/A tidak
 
 | # | Ketentuan | Target | Bukti | Status |
 |---|---|---|---|---|
-| 1.2.1 | Migration | Semua tabel via migration | `migrate:fresh` sukses; `migrate:status` | 🟡 (M1: tabel Auth) |
-| 1.2.2 | Seeder | Role, user, product, supplier, inventory | `--seed` sukses; data demo | 🟡 (M1–M2: role, user, 5 kategori, 5 satuan, 20 produk; supplier/inventory menyusul) |
-| 1.2.3 | Factory | Minimal 8 factory | `database/factories`/modul | 🟡 (M1–M2: 4/8 — User, Product, Category, Unit) |
-| 1.2.4 | Relasi One-to-Many | Unit→Product, PaymentTerm→Supplier, Receipt→Items, Issue→Items | ERD + model + test | 🟡 (Unit→Product selesai + test; tiga relasi lain menyusul) |
+| 1.2.1 | Migration | Semua tabel via migration | `migrate:fresh` sukses; `migrate:status` | 🟡 (M1–M3: tabel Auth, Product, Supplier) |
+| 1.2.2 | Seeder | Role, user, product, supplier, inventory | `--seed` sukses; data demo | 🟡 (M1–M3: role, user, 5 kategori, 5 satuan, 20 produk, 4 termin, 5 pemasok; inventory menyusul) |
+| 1.2.3 | Factory | Minimal 8 factory | `database/factories`/modul | 🟡 (M1–M3: 6/8 — User, Product, Category, Unit, Supplier, PaymentTerm) |
+| 1.2.4 | Relasi One-to-Many | Unit→Product, PaymentTerm→Supplier, Receipt→Items, Issue→Items | ERD + model + test | 🟡 (Unit→Product, PaymentTerm→Supplier selesai + test; dua relasi Inventory menyusul) |
 | 1.2.5 | Relasi Many-to-Many dengan pivot | `category_product`, `role_user` | ERD + pivot migration + test | ✅ (`role_user` M1 + `category_product` M2, keduanya diuji) |
 | 1.2.6 | ERD akurat | Semua tabel & relasi | `LAPORAN.md` BAB II | ⬜ |
-| 1.2.7 | Foreign key & index | FK, unique, index query | `DATABASE.md`; schema | 🟡 (Auth + Product sudah; Supplier–Inventory menyusul) |
-| 1.2.8 | Data dummy realistis | 20 produk, 5 pemasok, transaksi | Seed + screenshot | 🟡 (20 produk realistis sudah; 5 pemasok + transaksi menyusul) |
+| 1.2.7 | Foreign key & index | FK, unique, index query | `DATABASE.md`; schema | 🟡 (Auth + Product + Supplier sudah; Inventory menyusul) |
+| 1.2.8 | Data dummy realistis | 20 produk, 5 pemasok, transaksi | Seed + screenshot | 🟡 (20 produk + 5 pemasok sudah; transaksi stok menyusul) |
 
 ### 1.3 Autentikasi & Otorisasi
 
@@ -39,8 +39,8 @@ Legenda: ✅ selesai/tersedia · ⬜ belum · 🔍 perlu verifikasi · N/A tidak
 | 1.3.1 | Login/Register memakai Sanctum | Web session + API token | `AUTH` route; token response | ✅ (M1) |
 | 1.3.2 | RBAC minimal 2 role | `admin`, `staff_gudang` | Tabel roles + matrix | ✅ (M1) |
 | 1.3.3 | Protected routes middleware `auth` | Semua kecuali login/register | `route:list` | ✅ (M1, route yang ada) |
-| 1.3.4 | Middleware `role` | Master write admin; stok kedua role | `route:list`; test 403 | 🟡 (Product write admin + test 403; Supplier M3, stok M4) |
-| 1.3.5 | Policy | Product, Supplier, StockReceipt, StockIssue, ActivityLog | Kode + test | 🟡 (`ProductPolicy` selesai + test; empat policy lain menyusul) |
+| 1.3.4 | Middleware `role` | Master write admin; stok kedua role | `route:list`; test 403 | 🟡 (Product + Supplier write admin + test 403; stok M4) |
+| 1.3.5 | Policy | Product, Supplier, StockReceipt, StockIssue, ActivityLog | Kode + test | 🟡 (`ProductPolicy`, `SupplierPolicy` selesai + test; tiga policy Inventory/Reporting menyusul) |
 | 1.3.6 | Token ability/revoke | Login token; logout revoke | Test API | ✅ (M1) |
 | 1.3.7 | Register tidak bisa jadi admin | Role dipaksa staff | Test | ✅ (M1) |
 | 1.3.8 | Rate limit login | `throttle:6,1` | Test 429 | ✅ (M1) |
@@ -50,10 +50,10 @@ Legenda: ✅ selesai/tersedia · ⬜ belum · 🔍 perlu verifikasi · N/A tidak
 
 | # | Ketentuan | Target | Bukti | Status |
 |---|---|---|---|---|
-| 1.4.1 | Semua input via Form Request | 15+ request | Daftar di `ERROR-HANDLING.md` | 🟡 (M1–M2: 9 request — Auth 2 + Product 7) |
+| 1.4.1 | Semua input via Form Request | 15+ request | Daftar di `ERROR-HANDLING.md` | 🟡 (M1–M3: 14 request — Auth 2 + Product 7 + Supplier 5) |
 | 1.4.2 | Tidak ada `$request->validate()` di controller | 0 | Review kode | ✅ (0 di kode saat ini) |
-| 1.4.3 | Custom exception minimal 1 | 3 exception | Kode + screenshot | 🟡 (`ProductUnavailableException` tersedia; dipakai Inventory M4) |
-| 1.4.4 | Pesan error informatif di view | `$errors`, old input, alert | Screenshot validasi | 🟡 (Auth + Product selesai; Supplier–Inventory menyusul) |
+| 1.4.3 | Custom exception minimal 1 | 3 exception | Kode + screenshot | 🟡 (`ProductUnavailableException`, `SupplierUnavailableException` tersedia; dipakai Inventory M4) |
+| 1.4.4 | Pesan error informatif di view | `$errors`, old input, alert | Screenshot validasi | 🟡 (Auth + Product + Supplier selesai; Inventory menyusul) |
 | 1.4.5 | Error API jelas | status + `code` + `meta` | Screenshot/Postman | 🟡 (validasi/401 API; custom exception di M4) |
 | 1.4.6 | Error 401/403/404/419/429/500 | Halaman/JSON ramah | Screenshot | 🟡 (view 403/404/419/429/500 ada; screenshot menyusul) |
 | 1.4.7 | Validasi stok di service | Di dalam transaksi | Kode `IssueStockService` | ⬜ |
@@ -74,15 +74,15 @@ Legenda: ✅ selesai/tersedia · ⬜ belum · 🔍 perlu verifikasi · N/A tidak
 | # | Fitur | Detail | Bukti | Status |
 |---|---|---|---|---|
 | 2.1 | CRUD Barang | index/create/store/show/edit/update/delete (soft) | Screenshot + test | 🟡 (kode + 32 test lulus; screenshot menyusul) |
-| 2.2 | CRUD Pemasok | index/create/store/show/edit/update/delete (soft) | Screenshot + test | ⬜ |
+| 2.2 | CRUD Pemasok | index/create/store/show/edit/update/delete (soft) | Screenshot + test | 🟡 (kode + test lulus; screenshot menyusul) |
 | 2.3 | Kategori & Satuan | CRUD + relasi + delete guard | Screenshot + test | 🟡 (kode + test lulus; screenshot menyusul) |
-| 2.4 | Termin | CRUD + relasi O2M | Screenshot + test | ⬜ |
+| 2.4 | Termin | CRUD + relasi O2M | Screenshot + test | 🟡 (kode + test lulus; screenshot menyusul) |
 | 2.5 | Stok Masuk | dokumen + item + saldo + movement | Screenshot + test | ⬜ |
 | 2.6 | Stok Keluar | dokumen + item + validasi stok | Screenshot + test | ⬜ |
 | 2.7 | Validasi stok | stok kurang → exception, rollback | Test + screenshot | ⬜ |
 | 2.8 | Kartu Stok | filter produk/tanggal; saldo setelah | Screenshot + test | ⬜ |
 | 2.9 | Saldo Stok | daftar saldo & status rendah | Screenshot | ⬜ |
-| 2.10 | RBAC Admin vs Staff | hak berbeda | Screenshot 403 + test | 🟡 (Auth + Product sudah + test; Supplier–Inventory menyusul) |
+| 2.10 | RBAC Admin vs Staff | hak berbeda | Screenshot 403 + test | 🟡 (Auth + Product + Supplier sudah + test; Inventory menyusul) |
 | 2.11 | Dashboard | ringkasan & low stock | Screenshot | ⬜ |
 | 2.12 | Activity Log | audit aksi | Screenshot + test | ⬜ |
 
@@ -90,21 +90,21 @@ Legenda: ✅ selesai/tersedia · ⬜ belum · 🔍 perlu verifikasi · N/A tidak
 
 | # | Item | Target | Status |
 |---|---|---|---|
-| 3.1 | PSR-4 & namespace modul | `App\Modules\<Modul>\...` | ✅ (Auth + Product) |
-| 3.2 | Nama kelas/file konsisten | PascalCase, suffix jelas | ✅ (Auth + Product) |
-| 3.3 | Controller tipis; logika di service | Tidak ada transaksi di controller | 🟡 (Product memakai service; registrasi Auth masih di controller) |
-| 3.4 | Form Request untuk semua input | 0 validasi manual | ✅ (Auth + Product) |
-| 3.5 | Mass assignment aman | `$fillable` eksplisit | ✅ (Auth + Product) |
+| 3.1 | PSR-4 & namespace modul | `App\Modules\<Modul>\...` | ✅ (Auth + Product + Supplier) |
+| 3.2 | Nama kelas/file konsisten | PascalCase, suffix jelas | ✅ (Auth + Product + Supplier) |
+| 3.3 | Controller tipis; logika di service | Tidak ada transaksi di controller | 🟡 (Product/Supplier memakai service; registrasi Auth masih di controller) |
+| 3.4 | Form Request untuk semua input | 0 validasi manual | ✅ (Auth + Product + Supplier) |
+| 3.5 | Mass assignment aman | `$fillable` eksplisit | ✅ (Auth + Product + Supplier) |
 | 3.6 | Tidak ada query lintas modul | 0 | ✅ (0 pelanggaran saat ini; dicek ulang di M4–M5) |
-| 3.7 | Contract hanya DTO/primitif | 0 model/paginator | ✅ (`UserDirectoryContract`, `ProductCatalogContract`) |
-| 3.8 | Event after commit | `ShouldDispatchAfterCommit` | ✅ (Auth + Product) |
+| 3.7 | Contract hanya DTO/primitif | 0 model/paginator | ✅ (`UserDirectoryContract`, `ProductCatalogContract`, `SupplierDirectoryContract`) |
+| 3.8 | Event after commit | `ShouldDispatchAfterCommit` | ✅ (Auth + Product + Supplier) |
 | 3.9 | Transaksi + lock | Semua mutasi stok | ⬜ (M4) |
 | 3.10 | Decimal untuk uang/qty | Tidak ada float untuk stok | 🟡 (`min_stock` decimal; mutasi stok M4) |
 | 3.11 | Format Pint | `pint --test` hijau | ✅ |
-| 3.12 | Komentar secukupnya | Tidak ada kode mati | ✅ (Auth + Product) |
+| 3.12 | Komentar secukupnya | Tidak ada kode mati | ✅ (Auth + Product + Supplier) |
 | 3.13 | Tidak ada debug `dd()`/`dump()` | 0 | ✅ |
 | 3.14 | Tidak ada credential hardcoded | 0 | 🟡 (password demo seeder memang didokumentasikan; tidak ada token/secret) |
-| 3.15 | Error handling konsisten | Exception + render | 🟡 (exception produk tersedia; render dipakai M4) |
+| 3.15 | Error handling konsisten | Exception + render | 🟡 (exception Product/Supplier tersedia; render dipakai M4) |
 
 ## 4. Dokumentasi
 
@@ -132,16 +132,16 @@ Legenda: ✅ selesai/tersedia · ⬜ belum · 🔍 perlu verifikasi · N/A tidak
 |---|---|---|---|
 | 5.1 | Feature Auth/RBAC | 13+ skenario | 🟡 (AUTH-01..11; AUTH-12/13 butuh M4) |
 | 5.2 | Feature Product | 10+ skenario | ✅ (32 test Product) |
-| 5.3 | Feature Supplier | 6+ skenario | ⬜ |
+| 5.3 | Feature Supplier | 6+ skenario | ✅ (22 test Supplier) |
 | 5.4 | Feature Inventory | 16+ skenario | ⬜ |
 | 5.5 | Feature Reporting | 6+ skenario | ⬜ |
 | 5.6 | Unit | 4+ skenario | ⬜ |
 | 5.7 | Rollback | 1+ skenario kritis | ⬜ |
-| 5.8 | Validasi | minimal 1 gagal per form | 🟡 (Auth + Product selesai; Supplier–Inventory menyusul) |
+| 5.8 | Validasi | minimal 1 gagal per form | 🟡 (Auth + Product + Supplier selesai; Inventory menyusul) |
 | 5.9 | API | 6+ skenario | 🟡 (API Auth sudah; API master/stok menyusul) |
-| 5.10 | Semua test hijau | `php artisan test` | ✅ (65 test, 287 assertions per 2026-11-19) |
+| 5.10 | Semua test hijau | `php artisan test` | ✅ (87 test, 402 assertions per 2026-11-19) |
 | 5.11 | Pint bersih | `vendor/bin/pint --test` | ✅ |
-| 5.12 | Uji manual semua halaman | checklist `TESTING.md` | 🟡 (Auth + Product sudah; modul lain menyusul) |
+| 5.12 | Uji manual semua halaman | checklist `TESTING.md` | 🟡 (Auth + Product + Supplier sudah; modul lain menyusul) |
 | 5.13 | Screenshot test/hasil | 30 bukti | ⬜ |
 
 ## 6. Laporan dan Video
@@ -243,8 +243,9 @@ git status
 ## 11. Catatan Status
 
 - Dokumen perencanaan (13 file) **sudah dibuat** dan konsisten.
-- M0 (fondasi proyek), M1 (Auth & RBAC), dan M2 (Product) **selesai**; modul M3–M5 belum dimulai, sehingga checklist fitur terkait masih ⬜.
+- M0 (fondasi proyek), M1 (Auth & RBAC), M2 (Product), dan M3 (Supplier) **selesai**; modul M4–M5 belum dimulai, sehingga checklist fitur terkait masih ⬜.
 - Bukti M1: `migrate:fresh --seed` sukses, 33 feature test lulus (134 assertions), Pint bersih, dan uji manual login web + API token.
-- Bukti M2: `migrate:fresh --seed` menghasilkan 5 kategori, 5 satuan, dan 20 produk; 32 test Product lulus; total suite 65 test / 287 assertions; Pint bersih; halaman `/products`, `/categories`, `/units` sudah diuji manual dan memuat CSS ter-build.
+- Bukti M2: `migrate:fresh --seed` menghasilkan 5 kategori, 5 satuan, dan 20 produk; 32 test Product lulus; halaman `/products`, `/categories`, `/units` sudah diuji manual dan memuat CSS ter-build.
+- Bukti M3: `migrate:fresh --seed` menghasilkan 4 termin dan 5 pemasok; 22 test Supplier lulus; halaman `/suppliers` dan `/payment-terms` sudah diuji manual; total suite 87 test / 402 assertions; Pint bersih.
 - Setelah coding, perbarui dokumen ini dan `README.md` dengan status sebenarnya.
 - Jangan menandai ✅ tanpa bukti (screenshot/test/commit).

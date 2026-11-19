@@ -147,6 +147,8 @@ tests/
 | SUP-05 | `SupplierCrudTest::test_payment_term_cannot_be_deleted_when_used` | termin dipakai | error `delete` |
 | SUP-06 | `SupplierCrudTest::test_staff_cannot_update_supplier` | staff PUT | 403 |
 
+> **Status 2026-11-19:** SUP-01 sampai SUP-06 sudah diimplementasikan di `tests/Feature/Supplier/`. Tambahan test mencakup validasi kontak, update pemasok/termin, contract pencarian & histori, event pemasok, delete guard untuk pemasok soft-deleted, dan seeder. Total 22 test Supplier lulus.
+
 ### 4.4 Inventory
 
 | ID | Test | Skenario | Ekspektasi |

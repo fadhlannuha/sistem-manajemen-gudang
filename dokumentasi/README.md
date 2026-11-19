@@ -3,7 +3,7 @@
 **Mata kuliah:** Backend Development (DT199) · **Studi kasus:** 4. Sistem Manajemen Gudang (Warehouse)
 **Anggota:** Fadhlan Nuha M. (solo) · **NIM/Kelas:** 25.01.5292 / `<isi kelas>`
 
-> **Status saat ini:** M0 (fondasi), M1 (Auth & RBAC), dan M2 (Product) selesai. Fitur Supplier, Inventory, dan Reporting belum diimplementasikan.
+> **Status saat ini:** M0 (fondasi), M1 (Auth & RBAC), M2 (Product), dan M3 (Supplier) selesai. Fitur Inventory dan Reporting belum diimplementasikan.
 
 ## Ringkasan Proyek
 

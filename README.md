@@ -25,7 +25,7 @@ Aplikasi web modular monolith untuk mengelola barang, pemasok, stok masuk/keluar
 
 ## Status
 
-**M0 — Fondasi selesai. M1 — Auth & RBAC selesai (2026-11-19). M2 — Product selesai (2026-11-19).** Laravel 13.43.0, SQLite, Sanctum, session web, token API, role `admin`/`staff_gudang`, middleware `role`, `UserDirectoryContract`, serta CRUD barang/kategori/satuan lengkap dengan relasi 1:N dan M:N, soft delete, `ProductCatalogContract`, dan event produk sudah berjalan. Modul Supplier, Inventory, dan Reporting belum diimplementasikan.
+**M0 — Fondasi selesai. M1 — Auth & RBAC selesai (2026-11-19). M2 — Product selesai (2026-11-19). M3 — Supplier selesai (2026-11-19).** Laravel 13.43.0, SQLite, Sanctum, session web, token API, role `admin`/`staff_gudang`, middleware `role`, `UserDirectoryContract`, CRUD barang/kategori/satuan, CRUD pemasok/termin pembayaran, relasi 1:N dan M:N, soft delete, `ProductCatalogContract`, `SupplierDirectoryContract`, dan event master data sudah berjalan. Modul Inventory dan Reporting belum diimplementasikan.
 
 ### Akun Demo
 
