@@ -41,6 +41,10 @@
                     <a href="{{ route('units.index') }}" class="font-medium text-gray-700 hover:text-blue-700">Satuan</a>
                     <a href="{{ route('suppliers.index') }}" class="font-medium text-gray-700 hover:text-blue-700">Pemasok</a>
                     <a href="{{ route('payment-terms.index') }}" class="font-medium text-gray-700 hover:text-blue-700">Termin</a>
+                    <a href="{{ route('inventory.balances.index') }}" class="font-medium text-gray-700 hover:text-blue-700">Saldo</a>
+                    <a href="{{ route('inventory.receipts.index') }}" class="font-medium text-gray-700 hover:text-blue-700">Stok Masuk</a>
+                    <a href="{{ route('inventory.issues.index') }}" class="font-medium text-gray-700 hover:text-blue-700">Stok Keluar</a>
+                    <a href="{{ route('inventory.stock-card.index') }}" class="font-medium text-gray-700 hover:text-blue-700">Kartu Stok</a>
                     <span class="hidden text-gray-500 sm:inline">{{ auth()->user()->name }}</span>
 
                     @foreach (auth()->user()->roles as $role)

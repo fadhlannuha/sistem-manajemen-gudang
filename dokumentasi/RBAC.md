@@ -506,9 +506,9 @@ public function test_api_requires_token(): void
 - [x] Register publik tidak bisa menjadi admin.
 - [x] Semua route aplikasi memakai `auth`, kecuali login/register. *(Route modul M2+ wajib mengikuti aturan ini.)*
 - [x] Route tulis master data memakai `role:admin`. *(Product + Supplier.)*
-- [ ] Route transaksi stok memakai `role:admin,staff_gudang`. *(Menunggu M4.)*
+- [x] Route transaksi stok memakai `role:admin,staff_gudang`. *(Receipt/issue create/store; diuji AUTH-12.)*
 - [ ] Activity log hanya admin. *(Menunggu M5.)*
-- [ ] Policy terdaftar dan dipanggil di controller untuk aksi sensitif. *(`ProductPolicy`, `SupplierPolicy` sudah; policy Inventory/Reporting menunggu M4–M5.)*
+- [x] Policy terdaftar dan dipanggil di controller untuk aksi sensitif. *(`ProductPolicy`, `SupplierPolicy`, `StockReceiptPolicy`, `StockIssuePolicy` sudah; `ActivityLogPolicy` menyusul M5.)*
 - [x] Menu/tombol admin disembunyikan dengan `@role`. *(Product + Supplier.)*
 - [x] 401/403 diuji untuk web dan API.
 - [x] Token Sanctum dibuat saat login API, dicabut saat logout.
@@ -517,4 +517,4 @@ public function test_api_requires_token(): void
 - [x] Rate limit login aktif.
 - [x] Halaman error 403/404/419/500 ada.
 
-> **Status M1–M3 (2026-11-19):** checklist yang bertanda `[x]` sudah dibuktikan lewat `tests/Feature/Auth/`, `tests/Feature/Product/`, dan `tests/Feature/Supplier/`; item Inventory/Reporting menunggu milestone masing-masing.
+> **Status M1–M4 (2026-11-19):** checklist yang bertanda `[x]` sudah dibuktikan lewat `tests/Feature/Auth/`, `tests/Feature/Product/`, `tests/Feature/Supplier/`, `tests/Feature/Inventory/`, dan `tests/Unit/`; item Reporting menunggu M5.

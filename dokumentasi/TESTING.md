@@ -100,7 +100,7 @@ tests/
 
 ### 4.1 Auth dan RBAC
 
-> **Status 2026-11-19:** AUTH-01 sampai AUTH-11 sudah diimplementasikan di `tests/Feature/Auth/` dan lulus. AUTH-12/AUTH-13 menunggu modul Inventory (M4).
+> **Status 2026-11-19:** AUTH-01 sampai AUTH-12 sudah diimplementasikan di `tests/Feature/Auth/` dan lulus. AUTH-12 diuji lewat route stok sungguhan (`RoleAccessTest::test_staff_can_create_stock_receipt`). AUTH-13 menunggu modul Reporting (M5).
 
 | ID | Test | Skenario | Ekspektasi |
 |---|---|---|---|
@@ -172,6 +172,8 @@ tests/
 | INV-17 | `ReceiveStockTest::test_api_receipt_returns_201` | POST API dengan token | 201, nomor dokumen ada |
 | INV-18 | `IssueStockTest::test_api_requires_token` | POST API tanpa token | 401 |
 
+> **Status 2026-11-19:** INV-01 sampai INV-18 sudah diimplementasikan di `tests/Feature/Inventory/`. Tambahan test mencakup produk unavailable, halaman saldo + filter stok rendah, listener `CreateStockBalance`, kartu stok produk nonaktif, dan seeder. Total 24 feature test Inventory + 6 unit test Inventory lulus.
+
 ### 4.5 Reporting
 
 | ID | Test | Skenario | Ekspektasi |
@@ -191,6 +193,8 @@ tests/
 | UNIT-02 | `StockNumberGeneratorTest::test_issue_number` | `SI-202601-000001` |
 | UNIT-03 | `DomainExceptionTest::test_insufficient_stock_message` | pesan memuat nama, tersedia, diminta |
 | UNIT-04 | `DomainExceptionTest::test_product_unavailable_message` | memuat ID |
+
+> **Status 2026-11-19:** UNIT-01 sampai UNIT-04 sudah diimplementasikan di `tests/Unit/` (plus satu test supplier unavailable dan satu test padding nomor).
 
 ## 5. Contoh Test
 

@@ -1,6 +1,6 @@
 # Rencana Pengerjaan UTS — Backend Development (DT199)
 
-> Status: **M0 (fondasi), M1 (Auth & RBAC), M2 (Product), dan M3 (Supplier) selesai; modul M4–M5 belum dimulai.**
+> Status: **M0 (fondasi), M1 (Auth & RBAC), M2 (Product), M3 (Supplier), dan M4 (Inventory) selesai; modul M5 (Reporting) belum dimulai.**
 > Semua panduan teknis ada di folder `dokumentasi/`. Baca `README.md` untuk peta dokumen.
 
 ## 1. Identitas dan Lingkup
@@ -132,6 +132,8 @@ Format ID: `AREA-NN`. Setiap item selesai harus punya commit dan bukti uji.
 | SUP-08 | Event `SupplierCreated/Updated/Deactivated` | Reporting mencatat activity log |
 
 > **Status M3:** ✅ selesai pada 2026-11-19. Migration, model, relasi 1:N PaymentTerm→Supplier, factory, seeder 4 termin/5 pemasok, CRUD pemasok + termin, Form Request, `SupplierPolicy`, `SupplierDirectoryContract`, dan tiga event pemasok sudah berjalan. Bukti: `tests/Feature/Supplier/` (22 test) lulus, total suite 87 test / 402 assertions, `vendor/bin/pint --test` bersih. Pemakaian contract oleh Inventory dan activity log Reporting menunggu M4–M5.
+
+> **Status M4:** ✅ selesai pada 2026-11-19. Enam migration Inventory, enam model, lima factory, tiga event, `InsufficientStockException`, `CreateStockBalance` listener, `StockNumberGenerator`, `ReceiveStockService`, `IssueStockService`, `InventoryQueryContract`/`InventoryQueryService`, lima Form Request, dua policy, halaman saldo/kartu stok/stok masuk/stok keluar, API inventory, dan seeder demo sudah berjalan. Bukti: 24 feature test Inventory + 6 unit test Inventory lulus, total suite 118 test / 553 assertions, `migrate:fresh --seed` menghasilkan 20 saldo, 3 penerimaan (16 item), 2 pengeluaran (7 item), 23 movement; Pint bersih. Consumer activity log Reporting menunggu M5.
 
 ### M4 — Inventory
 

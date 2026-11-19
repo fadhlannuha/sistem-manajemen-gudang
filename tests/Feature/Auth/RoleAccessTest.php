@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Tests\Feature\Auth;
 
 use App\Modules\Auth\Models\User;
+use App\Modules\Inventory\Models\StockBalance;
+use App\Modules\Product\Models\Product;
+use App\Modules\Supplier\Models\Supplier;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
@@ -67,6 +70,28 @@ class RoleAccessTest extends TestCase
             ->get(route('test.stock-transactions'))
             ->assertOk()
             ->assertSee('stock-transactions');
+    }
+
+    public function test_staff_can_create_stock_receipt(): void
+    {
+        $staff = User::factory()->staff()->create();
+        $supplier = Supplier::factory()->create();
+        $product = Product::factory()->create(['min_stock' => 0]);
+        StockBalance::create(['product_id' => $product->id, 'qty' => 0]);
+
+        $response = $this->actingAs($staff)->post(route('inventory.receipts.store'), [
+            'supplier_id' => $supplier->id,
+            'received_at' => '2026-01-05',
+            'items' => [
+                ['product_id' => $product->id, 'qty' => 3, 'unit_cost' => 1000],
+            ],
+        ]);
+
+        $response->assertRedirect();
+        $this->assertDatabaseHas('stock_balances', [
+            'product_id' => $product->id,
+            'qty' => 3,
+        ]);
     }
 
     public function test_role_middleware_rejects_guest_with_401(): void

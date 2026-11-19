@@ -641,7 +641,7 @@ Factory tidak boleh memanggil service kompleks secara default agar test tetap de
 2. `UserSeeder` — 1 admin + 2 staff; assign role.
 3. `ProductSeeder` — 5 kategori, 5 satuan, 20 produk; pasang kategori; buat saldo awal 0 (langsung atau dengan mengirim `ProductCreated`).
 4. `SupplierSeeder` — 4 termin, 5 pemasok.
-5. `InventorySeeder` — pastikan setiap produk punya baris `stock_balances` (`firstOrCreate`), lalu 3 penerimaan + 2 pengeluaran via service; saldo dan movement terbentuk; activity log ikut terisi.
+5. `InventorySeeder` — pastikan setiap produk punya baris `stock_balances` (`firstOrCreate`), lalu 3 penerimaan + 2 pengeluaran via service; saldo dan movement terbentuk (activity log baru terisi setelah M5).
 6. `ReportingSeeder` (opsional) — tidak perlu jika event sudah menghasilkan log; dapat menambah log demo.
 
 > **Penting:** `ReceiveStockService`/`IssueStockService` melakukan `lockForUpdate()` pada saldo yang sudah ada. Karena itu setiap produk wajib memiliki baris `stock_balances` sebelum transaksi pertama. Jalur normal adalah listener `CreateStockBalance` saat `ProductCreated`; seeder harus memastikan invariant ini tetap terpenuhi meskipun event tidak dijalankan.
@@ -658,8 +658,8 @@ Data contoh:
 | Termin | Cash (0), Net 7, Net 14, Net 30 |
 | Jumlah produk | 20 |
 | Jumlah pemasok | 5 |
-| Penerimaan | 3 dokumen (total item ± 8) |
-| Pengeluaran | 2 dokumen (total item ± 5) |
+| Penerimaan | 3 dokumen (16 item) |
+| Pengeluaran | 2 dokumen (7 item) |
 
 Pastikan seeder **tidak** menghasilkan stok negatif. Jika sebuah produk ingin didemokan stok rendah, atur `min_stock` lebih besar dari saldo setelah pengeluaran. Seeder master data sebaiknya idempotent (`firstOrCreate`/`updateOrCreate`); `InventorySeeder` boleh mengasumsikan database baru (`migrate:fresh --seed`).
 

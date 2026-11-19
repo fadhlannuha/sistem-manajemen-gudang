@@ -543,17 +543,19 @@ final class StockNumberGenerator
 
 ### 5.7 Acceptance
 
-- [ ] Stok masuk menambah saldo dan movement; total benar.
-- [ ] Stok keluar mengurangi saldo; stok kurang → exception, tidak ada data tersimpan.
-- [ ] Dua item, item kedua gagal → seluruh dokumen rollback.
-- [ ] Kartu stok menampilkan urutan kronologis dan saldo setelah sesuai.
-- [ ] Saldo tidak pernah negatif.
-- [ ] Nomor dokumen unik dan berformat benar.
-- [ ] Staff dan admin bisa transaksi; tidak ada edit/delete dokumen.
-- [ ] API transaksi memakai service yang sama; 201 sukses, 422 validasi, 409 stok kurang.
+- [x] Stok masuk menambah saldo dan movement; total benar.
+- [x] Stok keluar mengurangi saldo; stok kurang → exception, tidak ada data tersimpan.
+- [x] Dua item, item kedua gagal → seluruh dokumen rollback.
+- [x] Kartu stok menampilkan urutan kronologis dan saldo setelah sesuai.
+- [x] Saldo tidak pernah negatif.
+- [x] Nomor dokumen unik dan berformat benar.
+- [x] Staff dan admin bisa transaksi; tidak ada edit/delete dokumen.
+- [x] API transaksi memakai service yang sama; 201 sukses, 422 validasi, 409 stok kurang.
 - [ ] Contract dipakai Reporting; tidak ada model Inventory di Reporting.
 - [ ] Event tercatat; low stock muncul di dashboard.
-- [ ] `lockForUpdate()` dan `DB::transaction()` terlihat di kode (bukti laporan).
+- [x] `lockForUpdate()` dan `DB::transaction()` terlihat di kode (bukti laporan).
+
+> **Status M4 (2026-11-19):** seluruh acceptance Inventory yang tidak bergantung pada Reporting sudah terpenuhi dan diuji. Dua item terakhir menunggu M5 (dashboard/activity log).
 
 ## 6. ReportingModule
 

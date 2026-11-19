@@ -25,7 +25,7 @@ Aplikasi web modular monolith untuk mengelola barang, pemasok, stok masuk/keluar
 
 ## Status
 
-**M0 — Fondasi selesai. M1 — Auth & RBAC selesai (2026-11-19). M2 — Product selesai (2026-11-19). M3 — Supplier selesai (2026-11-19).** Laravel 13.43.0, SQLite, Sanctum, session web, token API, role `admin`/`staff_gudang`, middleware `role`, `UserDirectoryContract`, CRUD barang/kategori/satuan, CRUD pemasok/termin pembayaran, relasi 1:N dan M:N, soft delete, `ProductCatalogContract`, `SupplierDirectoryContract`, dan event master data sudah berjalan. Modul Inventory dan Reporting belum diimplementasikan.
+**M0 — Fondasi selesai. M1 — Auth & RBAC selesai (2026-11-19). M2 — Product selesai (2026-11-19). M3 — Supplier selesai (2026-11-19). M4 — Inventory selesai (2026-11-19).** Laravel 13.43.0, SQLite, Sanctum, session web, token API, role `admin`/`staff_gudang`, middleware `role`, `UserDirectoryContract`, CRUD barang/kategori/satuan, CRUD pemasok/termin pembayaran, relasi 1:N dan M:N, soft delete, `ProductCatalogContract`, `SupplierDirectoryContract`, `InventoryQueryContract`, transaksi stok masuk/keluar dengan lock + rollback, saldo, kartu stok, dan event stok sudah berjalan. Modul Reporting (dashboard dan activity log) belum diimplementasikan.
 
 ### Akun Demo
 
@@ -37,7 +37,7 @@ Setelah `php artisan migrate:fresh --seed`:
 | `staff@warehouse.test` | `password` | `staff_gudang` |
 | `staff2@warehouse.test` | `password` | `staff_gudang` |
 
-Endpoint API: `POST /api/v1/auth/login`, `POST /api/v1/auth/logout`, `GET /api/v1/me`.
+Endpoint API: `POST /api/v1/auth/login`, `POST /api/v1/auth/logout`, `GET /api/v1/me`, `POST /api/v1/inventory/receipts`, `POST /api/v1/inventory/issues`, `GET /api/v1/inventory/balances`, `GET /api/v1/inventory/products/{productId}/movements`.
 
 ## Dokumentasi
 
