@@ -253,8 +253,8 @@ app/Modules/Product/
 - [x] Relasi Unit 1:N dan Product M:N terbukti di test dan ERD.
 - [x] Soft delete produk: hilang dari index; `find` null; method historis tetap mengembalikan data untuk kartu stok.
 - [x] Staff tidak bisa create/edit/delete.
-- [ ] `ProductCreated` membuat saldo 0 di Inventory (menunggu listener Inventory di M4).
-- [ ] Tidak ada akses model Product dari Inventory/Reporting (diverifikasi saat M4–M5).
+- [x] `ProductCreated` membuat saldo 0 di Inventory (`CreateStockBalance`).
+- [x] Tidak ada akses model Product dari Inventory/Reporting (diverifikasi di M4–M5).
 
 ## 4. SupplierModule
 
@@ -338,8 +338,8 @@ app/Modules/Supplier/
 - [x] Delete termin ditolak jika dipakai.
 - [x] Soft delete pemasok tidak merusak dokumen lama; nama pemasok lama diambil lewat method historis contract.
 - [x] Staff tidak bisa create/edit/delete.
-- [ ] Contract dipakai Inventory tanpa model Supplier (diverifikasi saat M4).
-- [ ] Event tercatat di Reporting (menunggu M5).
+- [x] Contract dipakai Inventory tanpa model Supplier (diverifikasi di M4).
+- [x] Event tercatat di Reporting (`RecordActivityLog`).
 
 ## 5. InventoryModule
 
@@ -551,11 +551,11 @@ final class StockNumberGenerator
 - [x] Nomor dokumen unik dan berformat benar.
 - [x] Staff dan admin bisa transaksi; tidak ada edit/delete dokumen.
 - [x] API transaksi memakai service yang sama; 201 sukses, 422 validasi, 409 stok kurang.
-- [ ] Contract dipakai Reporting; tidak ada model Inventory di Reporting.
-- [ ] Event tercatat; low stock muncul di dashboard.
+- [x] Contract dipakai Reporting; tidak ada model Inventory di Reporting.
+- [x] Event tercatat; low stock muncul di dashboard.
 - [x] `lockForUpdate()` dan `DB::transaction()` terlihat di kode (bukti laporan).
 
-> **Status M4 (2026-11-19):** seluruh acceptance Inventory yang tidak bergantung pada Reporting sudah terpenuhi dan diuji. Dua item terakhir menunggu M5 (dashboard/activity log).
+> **Status M4 (2026-11-19):** seluruh acceptance Inventory terpenuhi dan diuji. Dua item yang bergantung pada Reporting sudah dipenuhi di M5 (dashboard/activity log).
 
 ## 6. ReportingModule
 
@@ -620,11 +620,13 @@ app/Modules/Reporting/
 
 ### 6.6 Acceptance
 
-- [ ] Setiap aksi penting (login/register, CRUD master, stok masuk/keluar) menghasilkan activity log.
-- [ ] Dashboard menampilkan angka yang benar dan daftar stok rendah.
-- [ ] Activity page hanya admin; staff 403.
-- [ ] Reporting tidak mengimpor model Product/Inventory/User.
-- [ ] Log tidak menyimpan data sensitif.
+- [x] Setiap aksi penting (login/register, CRUD master, stok masuk/keluar) menghasilkan activity log.
+- [x] Dashboard menampilkan angka yang benar dan daftar stok rendah.
+- [x] Activity page hanya admin; staff 403.
+- [x] Reporting tidak mengimpor model Product/Inventory/User.
+- [x] Log tidak menyimpan data sensitif.
+
+> **Status M5 (2026-11-19):** seluruh acceptance Reporting terpenuhi. `RecordActivityLog` mendengarkan 10 event (user, product, supplier, stock) dan dibungkus `try/catch` + `Log::warning` agar logging tidak menggagalkan operasi utama. Dashboard memakai `ProductCatalogContract`, `SupplierDirectoryContract`, dan `InventoryQueryContract`; activity page memakai `ActivityFilterRequest`, `ActivityLogPolicy`, dan route `role:admin`. Bukti: 11 feature test Reporting + AUTH-13 lulus, total suite 130 test / 606 assertions.
 
 ## 7. Route Global dan Middleware
 

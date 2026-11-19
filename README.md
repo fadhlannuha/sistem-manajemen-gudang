@@ -1,85 +1,58 @@
-# Sistem Manajemen Gudang
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-Proyek UTS **Backend Development (DT199)** — studi kasus **4. Sistem Manajemen Gudang (Warehouse)**.
+<p align="center">
+<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+</p>
 
-| Item | Isi |
-|---|---|
-| Nama | Fadhlan Nuha M. |
-| NIM | 25.01.5292 |
-| Kelas | `<isi kelas>` |
-| Mata kuliah | Backend Development (DT199), 4 SKS |
-| Semester | Ganjil 2026/2027 |
-| Dosen | Hastari Utama, M.Cs |
-| Repository | https://github.com/fadhlannuha/sistem-manajemen-gudang |
-| Video demo | menyusul (YouTube unlisted) |
+## About Laravel
 
-## Tentang Aplikasi
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-Aplikasi web modular monolith untuk mengelola barang, pemasok, stok masuk/keluar, saldo stok, kartu stok, dan activity log. Hak akses dibagi menjadi **Admin** dan **Staff Gudang**.
+- [Simple, fast routing engine](https://laravel.com/docs/routing).
+- [Powerful dependency injection container](https://laravel.com/docs/container).
+- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+- [Robust background job processing](https://laravel.com/docs/queues).
+- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-- **Stack:** Laravel 13, PHP 8.4+, SQLite, Blade, Vite/Tailwind, Laravel Sanctum.
-- **Arsitektur:** modular monolith dengan 5 modul: `Auth`, `Product`, `Supplier`, `Inventory`, `Reporting`.
-- **Komunikasi antar modul:** Contract untuk query sinkron dan domain event untuk efek samping. Tidak ada modul yang mengakses model/tabel modul lain secara langsung.
-- **Database:** SQLite; `stock_movements` menjadi ledger kartu stok, `stock_balances` menyimpan saldo terkini.
-- **Transaksi stok:** `DB::transaction()` + `lockForUpdate()` + validasi ulang stok di dalam transaksi.
+Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Status
+## Learning Laravel
 
-**M0 — Fondasi selesai. M1 — Auth & RBAC selesai (2026-11-19). M2 — Product selesai (2026-11-19). M3 — Supplier selesai (2026-11-19). M4 — Inventory selesai (2026-11-19).** Laravel 13.43.0, SQLite, Sanctum, session web, token API, role `admin`/`staff_gudang`, middleware `role`, `UserDirectoryContract`, CRUD barang/kategori/satuan, CRUD pemasok/termin pembayaran, relasi 1:N dan M:N, soft delete, `ProductCatalogContract`, `SupplierDirectoryContract`, `InventoryQueryContract`, transaksi stok masuk/keluar dengan lock + rollback, saldo, kartu stok, dan event stok sudah berjalan. Modul Reporting (dashboard dan activity log) belum diimplementasikan.
+Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-### Akun Demo
+In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-Setelah `php artisan migrate:fresh --seed`:
+You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
 
-| Email | Password | Role |
-|---|---|---|
-| `admin@warehouse.test` | `password` | `admin` |
-| `staff@warehouse.test` | `password` | `staff_gudang` |
-| `staff2@warehouse.test` | `password` | `staff_gudang` |
+## Agentic Development
 
-Endpoint API: `POST /api/v1/auth/login`, `POST /api/v1/auth/logout`, `GET /api/v1/me`, `POST /api/v1/inventory/receipts`, `POST /api/v1/inventory/issues`, `GET /api/v1/inventory/balances`, `GET /api/v1/inventory/products/{productId}/movements`.
-
-## Dokumentasi
-
-Semua perencanaan, arsitektur, schema, kontrak, aturan RBAC, error handling, testing, setup, laporan, dan checklist ada di folder [`dokumentasi/`](dokumentasi/README.md).
-
-Mulai dari:
-
-1. [`dokumentasi/PLAN.md`](dokumentasi/PLAN.md) — milestone dan backlog.
-2. [`dokumentasi/ARCHITECTURE.md`](dokumentasi/ARCHITECTURE.md) — batas modul dan provider.
-3. [`dokumentasi/DATABASE.md`](dokumentasi/DATABASE.md) — ERD dan schema.
-4. [`dokumentasi/CONTRACTS.md`](dokumentasi/CONTRACTS.md) — contract, DTO, event.
-
-## Instalasi Lokal
+Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
 
 ```bash
-composer install
-cp .env.example .env
-php artisan key:generate
-touch database/database.sqlite
-php artisan migrate
-npm install
-npm run build
-php artisan serve
+composer require laravel/boost --dev
+
+php artisan boost:install
 ```
 
-Konfigurasi default memakai SQLite, locale `id`, dan timezone `Asia/Jakarta`.
+Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
 
-> **Catatan CSS:** layout memakai `@vite`, jadi aset frontend harus di-build. Jika halaman tampil tanpa Tailwind, jalankan `npm install && npm run build`. Saat pengembangan, `npm run dev` di terminal terpisah juga bisa dipakai. Folder `public/build` tidak di-commit.
+## Contributing
 
-## Perintah Penting
+Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-```bash
-php artisan test
-vendor/bin/pint --test
-php artisan route:list --except-vendor
-php artisan migrate:fresh --seed
-```
+## Code of Conduct
 
-## Aturan Kontribusi
+In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-Proyek ini solo, tetapi aturan kerja untuk agen/AI dan kontributor ada di [`dokumentasi/AGENTS.md`](dokumentasi/AGENTS.md). Patuhi batas modul, gunakan Form Request, contract, event, dan transaksi database sesuai dokumen tersebut.
+## Security Vulnerabilities
 
-## Lisensi
+If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-Kode aplikasi menggunakan lisensi MIT. Dokumen dan laporan UTS merupakan karya Fadhlan Nuha M.
+## License
+
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

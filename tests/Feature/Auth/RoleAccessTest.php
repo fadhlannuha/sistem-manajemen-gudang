@@ -94,6 +94,15 @@ class RoleAccessTest extends TestCase
         ]);
     }
 
+    public function test_staff_cannot_view_activity_log(): void
+    {
+        $staff = User::factory()->staff()->create();
+
+        $this->actingAs($staff)
+            ->get(route('activity.index'))
+            ->assertForbidden();
+    }
+
     public function test_role_middleware_rejects_guest_with_401(): void
     {
         $this->get(route('test.role-without-auth'))->assertStatus(401);

@@ -1,6 +1,6 @@
 # Rencana Pengerjaan UTS — Backend Development (DT199)
 
-> Status: **M0 (fondasi), M1 (Auth & RBAC), M2 (Product), M3 (Supplier), dan M4 (Inventory) selesai; modul M5 (Reporting) belum dimulai.**
+> Status: **M0 (fondasi), M1 (Auth & RBAC), M2 (Product), M3 (Supplier), M4 (Inventory), dan M5 (Reporting) selesai.**
 > Semua panduan teknis ada di folder `dokumentasi/`. Baca `README.md` untuk peta dokumen.
 
 ## 1. Identitas dan Lingkup
@@ -50,7 +50,6 @@ Detail lengkap: `ARCHITECTURE.md`, `DATABASE.md`, `MODULES.md`, `CONTRACTS.md`.
 | `SETUP.md` | Instalasi, env, migrate/seed, akun demo, troubleshooting | Selesai |
 | `LAPORAN.md` | Kerangka BAB I–V, screenshot, video, checklist submit | Selesai |
 | `CHECKLIST.md` | Matriks ketentuan soal → bukti, rubrik, DoD | Selesai |
-| `AGENTS.md` | Aturan kerja agen/AI saat implementasi | Selesai |
 
 ## 4. Milestone dan Estimasi
 
@@ -81,7 +80,7 @@ Format ID: `AREA-NN`. Setiap item selesai harus punya commit dan bukti uji.
 | INF-04 | Konfigurasi SQLite, locale `id`, timezone `Asia/Jakarta` | `php artisan migrate` sukses; `APP_LOCALE=id` |
 | INF-05 | Buat kerangka 5 modul + provider, daftarkan di `bootstrap/providers.php` | `php artisan about`/`route:list` tidak error; provider termuat |
 | INF-06 | Pasang Pint dan jalankan pada scaffold | `vendor/bin/pint --test` bersih |
-| INF-07 | Tulis `AGENTS.md` dan konvensi commit | Dokumen ada; commit contoh mengikuti konvensi |
+| INF-07 | Tulis konvensi commit dan aturan kontribusi | Commit contoh mengikuti konvensi |
 
 > **Status M0:** ✅ selesai pada 2026-11-17. Laravel 13.43.0, PHP 8.5, SQLite, Sanctum, 5 provider modul, dan autoload `App\Modules\...` sudah berjalan.
 
@@ -134,6 +133,8 @@ Format ID: `AREA-NN`. Setiap item selesai harus punya commit dan bukti uji.
 > **Status M3:** ✅ selesai pada 2026-11-19. Migration, model, relasi 1:N PaymentTerm→Supplier, factory, seeder 4 termin/5 pemasok, CRUD pemasok + termin, Form Request, `SupplierPolicy`, `SupplierDirectoryContract`, dan tiga event pemasok sudah berjalan. Bukti: `tests/Feature/Supplier/` (22 test) lulus, total suite 87 test / 402 assertions, `vendor/bin/pint --test` bersih. Pemakaian contract oleh Inventory dan activity log Reporting menunggu M4–M5.
 
 > **Status M4:** ✅ selesai pada 2026-11-19. Enam migration Inventory, enam model, lima factory, tiga event, `InsufficientStockException`, `CreateStockBalance` listener, `StockNumberGenerator`, `ReceiveStockService`, `IssueStockService`, `InventoryQueryContract`/`InventoryQueryService`, lima Form Request, dua policy, halaman saldo/kartu stok/stok masuk/stok keluar, API inventory, dan seeder demo sudah berjalan. Bukti: 24 feature test Inventory + 6 unit test Inventory lulus, total suite 118 test / 553 assertions, `migrate:fresh --seed` menghasilkan 20 saldo, 3 penerimaan (16 item), 2 pengeluaran (7 item), 23 movement; Pint bersih. Consumer activity log Reporting menunggu M5.
+
+> **Status M5:** ✅ selesai pada 2026-11-19. Migration + model + factory `activity_logs`, listener `RecordActivityLog` untuk 10 event domain, `ActivityLogPolicy`, route `/activity` khusus admin dengan filter event/tanggal/aktor, `DashboardService` (total barang, total pemasok, stok rendah, transaksi terakhir, aktivitas terakhir), dashboard baru, dan navigasi Activity Log. Bukti: 11 feature test Reporting lulus, total suite 130 test / 606 assertions, `migrate:fresh --seed` mengisi 6 activity log stok, Pint bersih. Log tidak menyimpan password/token; Reporting hanya memakai contract/DTO/event dan model `ActivityLog` sendiri.
 
 ### M4 — Inventory
 
@@ -235,7 +236,7 @@ Format ID: `AREA-NN`. Setiap item selesai harus punya commit dan bukti uji.
 
 | Risiko | Dampak | Mitigasi |
 |---|---|---|
-| Akses model lintas modul tanpa sengaja | Kehilangan nilai struktur + komunikasi (30%) | Review `use` di setiap controller/service; aturan di `AGENTS.md`; architecture test opsional |
+| Akses model lintas modul tanpa sengaja | Kehilangan nilai struktur + komunikasi (30%) | Review `use` di setiap controller/service; aturan di `ARCHITECTURE.md`; architecture test opsional |
 | Contract mengembalikan Eloquent model | Modul lain dapat memanggil relasi/tabel secara tidak langsung | Contract hanya mengembalikan DTO/array primitif; review signature |
 | SQLite tidak mendukung `lockForUpdate` seperti MySQL | Race condition tidak teruji nyata | Dokumentasikan; tetap gunakan transaksi + lock; uji logika; sebutkan batasan di laporan |
 | Stok minus karena dua transaksi bersamaan | Data tidak konsisten saat demo | Validasi ulang di dalam transaksi; unique saldo; uji rollback; demo satu operator |
@@ -280,4 +281,3 @@ Sebuah task dianggap selesai jika:
 7. Uji mengikuti `TESTING.md`.
 8. Ambil bukti dan susun laporan mengikuti `LAPORAN.md`.
 9. Sebelum submit, centang `CHECKLIST.md`.
-10. Saat memakai agen/AI, berikan `AGENTS.md` sebagai instruksi kerja.

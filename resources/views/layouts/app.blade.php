@@ -45,6 +45,9 @@
                     <a href="{{ route('inventory.receipts.index') }}" class="font-medium text-gray-700 hover:text-blue-700">Stok Masuk</a>
                     <a href="{{ route('inventory.issues.index') }}" class="font-medium text-gray-700 hover:text-blue-700">Stok Keluar</a>
                     <a href="{{ route('inventory.stock-card.index') }}" class="font-medium text-gray-700 hover:text-blue-700">Kartu Stok</a>
+                    @role('admin')
+                        <a href="{{ route('activity.index') }}" class="font-medium text-gray-700 hover:text-blue-700">Activity Log</a>
+                    @endrole
                     <span class="hidden text-gray-500 sm:inline">{{ auth()->user()->name }}</span>
 
                     @foreach (auth()->user()->roles as $role)

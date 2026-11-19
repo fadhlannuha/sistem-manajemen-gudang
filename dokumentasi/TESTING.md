@@ -100,7 +100,7 @@ tests/
 
 ### 4.1 Auth dan RBAC
 
-> **Status 2026-11-19:** AUTH-01 sampai AUTH-12 sudah diimplementasikan di `tests/Feature/Auth/` dan lulus. AUTH-12 diuji lewat route stok sungguhan (`RoleAccessTest::test_staff_can_create_stock_receipt`). AUTH-13 menunggu modul Reporting (M5).
+> **Status 2026-11-19:** AUTH-01 sampai AUTH-13 sudah diimplementasikan di `tests/Feature/Auth/` dan lulus. AUTH-12 diuji lewat route stok sungguhan (`RoleAccessTest::test_staff_can_create_stock_receipt`), AUTH-13 lewat route `/activity` (`RoleAccessTest::test_staff_cannot_view_activity_log`).
 
 | ID | Test | Skenario | Ekspektasi |
 |---|---|---|---|
@@ -184,6 +184,8 @@ tests/
 | RPT-04 | `DashboardTest::test_dashboard_shows_counts` | 2 produk, 1 supplier | angka sesuai |
 | RPT-05 | `DashboardTest::test_dashboard_shows_low_stock` | saldo < min | produk muncul |
 | RPT-06 | `DashboardTest::test_dashboard_does_not_expose_other_modules_models` | code review/architecture test | tidak ada import model |
+
+> **Status 2026-11-19:** RPT-01 sampai RPT-06 sudah diimplementasikan di `tests/Feature/Reporting/` dan lulus. Test Reporting memakai `DatabaseMigrations` agar listener `ShouldDispatchAfterCommit` benar-benar berjalan. Tambahan test mencakup log registrasi user, log stok masuk, filter activity, dan validasi rentang tanggal. Total suite 130 test / 606 assertions.
 
 ### 4.6 Unit
 

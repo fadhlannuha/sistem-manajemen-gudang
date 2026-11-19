@@ -39,7 +39,7 @@ class AuthPageTest extends TestCase
             ->get(route('dashboard.index'))
             ->assertOk()
             ->assertSee('Staff Dashboard')
-            ->assertSee('staff.dashboard@example.test')
+            ->assertSee('Total Barang')
             ->assertSee('Staff Gudang');
     }
 

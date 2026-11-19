@@ -3,7 +3,7 @@
 **Mata kuliah:** Backend Development (DT199) · **Studi kasus:** 4. Sistem Manajemen Gudang (Warehouse)
 **Anggota:** Fadhlan Nuha M. (solo) · **NIM/Kelas:** 25.01.5292 / `<isi kelas>`
 
-> **Status saat ini:** M0 (fondasi), M1 (Auth & RBAC), M2 (Product), M3 (Supplier), dan M4 (Inventory) selesai. Fitur Reporting (dashboard dan activity log) belum diimplementasikan.
+> **Status saat ini:** M0 (fondasi), M1 (Auth & RBAC), M2 (Product), M3 (Supplier), M4 (Inventory), dan M5 (Reporting) selesai.
 
 ## Ringkasan Proyek
 
@@ -34,7 +34,6 @@ Baca dengan urutan ini.
 | 9 | [`SETUP.md`](SETUP.md) | Instalasi, env, migrate/seed, akun demo, troubleshooting |
 | 10 | [`LAPORAN.md`](LAPORAN.md) | Kerangka BAB I–V, daftar screenshot, storyboard video, submit |
 | 11 | [`CHECKLIST.md`](CHECKLIST.md) | Matriks ketentuan soal → bukti, rubrik penilaian, DoD |
-| 12 | [`AGENTS.md`](AGENTS.md) | Aturan kerja untuk agen/AI selama implementasi |
 
 Bukti screenshot disimpan di [`screenshots/`](screenshots/README.md); daftar file wajib ada di `LAPORAN.md`.
 
@@ -89,7 +88,7 @@ Setiap modul memiliki `Providers/<Module>ServiceProvider.php`, `routes/web.php`,
 ## Cara Cepat Menggunakan Dokumen
 
 - **Mulai coding:** baca `PLAN.md` bagian milestone, lalu `SETUP.md`.
-- **Bingung batas modul:** `ARCHITECTURE.md` + `CONTRACTS.md` + `AGENTS.md`.
+- **Bingung batas modul:** `ARCHITECTURE.md` + `CONTRACTS.md`.
 - **Membuat migration:** `DATABASE.md`.
 - **Membuat route/controller:** `MODULES.md`.
 - **Mengatur akses:** `RBAC.md`.

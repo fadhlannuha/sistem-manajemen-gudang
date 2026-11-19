@@ -3,6 +3,7 @@
 .env
 .env.backup
 .env.production
+/UTS-REGULER-*
 /database/*.sqlite
 /database/*.sqlite-journal
 .phpactor.json
