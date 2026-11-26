@@ -1,6 +1,6 @@
 # Rencana Pengerjaan UTS — Backend Development (DT199)
 
-> Status: **M0 (fondasi), M1 (Auth & RBAC), M2 (Product), M3 (Supplier), M4 (Inventory), dan M5 (Reporting) selesai.**
+> Status: **M0 (fondasi), M1 (Auth & RBAC), M2 (Product), M3 (Supplier), M4 (Inventory), dan M5 (Reporting) selesai; M6/M7 (dokumentasi tim & bukti) dalam penyusunan.**
 > Semua panduan teknis ada di folder `dokumentasi/`. Baca `README.md` untuk peta dokumen.
 
 ## 1. Identitas dan Lingkup
@@ -10,10 +10,17 @@
 | Mata kuliah | Backend Development (DT199), 4 SKS, Semester Ganjil 2026/2027 |
 | Dosen | Hastari Utama, M.Cs |
 | Studi kasus | **4. Sistem Manajemen Gudang (Warehouse)** |
-| Anggota | Fadhlan Nuha M. (solo) |
-| NIM / Kelas | 25.01.5292 / `<isi kelas>` |
+| Anggota | Fadhlan Nuha Mukhlishin (25.01.5292) & Najib Arafi (25.01.5296) |
+| NIM / Kelas | 25.01.5292, 25.01.5296 / `<isi kelas>` |
 | Repositori | `https://github.com/fadhlannuha/sistem-manajemen-gudang` |
 | Output | Kode sumber (GitHub) + laporan PDF (Waskita) + video demo ≤ 10 menit (YouTube unlisted) |
+
+### Pembagian Tugas
+
+| Anggota | Modul & tanggung jawab | Bukti kontribusi |
+|---|---|---|
+| Fadhlan Nuha Mukhlishin | M0 Fondasi Laravel 13 & Sanctum; M1 Auth & RBAC; implementasi awal modul inti; M4 Inventory (transaksi, lock, rollback); UI/layout; integrasi & review PR | Commit `6226f40`–`976b431` di `main` |
+| Najib Arafi | Audit & perbaikan M2 Product, M3 Supplier, M5 Reporting sesuai dokumentasi; test regresi (137 test / 750 assertions); dokumentasi tim & bukti M6–M7 | PR #1 `fix/najib-modules-audit` (4 commit) |
 
 **Fitur wajib dari soal:** CRUD Barang & Pemasok, transaksi Stok Masuk/Keluar dengan validasi stok, Kartu Stok, RBAC (Admin vs Staff Gudang), Sanctum, Form Request, custom exception, database transaction, modular monolith minimal 3 modul.
 
@@ -182,7 +189,7 @@ Format ID: `AREA-NN`. Setiap item selesai harus punya commit dan bukti uji.
 | ID | Tugas | Acceptance |
 |---|---|---|
 | DOC-01 | Isi BAB I–V dari template `LAPORAN.md` | Semua subbab ada; diagram dan screenshot tertanam |
-| DOC-02 | Susun tabel pembagian tugas (solo) + peer assessment | Jujur dan konsisten |
+| DOC-02 | Susun tabel pembagian tugas 2 anggota + peer assessment | Jujur dan konsisten dengan `git log` |
 | DOC-03 | Rekam video ≤ 10 menit sesuai storyboard | Semua fitur wajib terlihat; audio jelas |
 | DOC-04 | Upload YouTube unlisted, tempel link di laporan | Link dapat diakses |
 | DOC-05 | Export PDF dengan nama `UTS_BackendDevelopment_<Kelas>_<NamaKelompok>.pdf` | Nama file benar; ukuran wajar |
@@ -202,8 +209,9 @@ Format ID: `AREA-NN`. Setiap item selesai harus punya commit dan bukti uji.
 
 ## 7. Strategi Git
 
-- Branch utama `main`; untuk solo, commit langsung ke `main` boleh, tetapi gunakan branch fitur bila ingin riwayat lebih rapi:
-  `feat/auth`, `feat/product`, `feat/supplier`, `feat/inventory`, `feat/reporting`, `docs/final`.
+- Branch utama `main`; dilarang push langsung ke `main`. Setiap anggota membuat branch fitur/dokumentasi lalu Pull Request:
+  `feat/auth`, `feat/product`, `feat/supplier`, `feat/inventory`, `feat/reporting`, `fix/najib-modules-audit`, `docs/team-and-evidence`.
+- Riwayat aktual: Fadhlan mengerjakan M0/M1/M4 dan merilis kelima commit awal; Najib menambahkan 4 commit audit perbaikan M2/M3/M5 melalui PR #1 (`fix/najib-modules-audit`) yang sudah di-merge ke `main`.
 - Commit kecil dan deskriptif, format Conventional Commits:
   - `feat(auth): add role middleware and policies`
   - `feat(product): add category-product pivot and relations`
@@ -264,11 +272,11 @@ Sebuah task dianggap selesai jika:
 
 | Hal | Status | Tindakan |
 |---|---|---|
-| NIM dan kelas | NIM `25.01.5292` sudah diisi; kelas belum | Isi kelas di cover laporan dan `README.md` |
+| NIM dan kelas | NIM `25.01.5292` dan `25.01.5296` sudah diisi; kelas belum | Isi kelas di cover laporan dan `README.md` |
 | URL repo GitHub | `https://github.com/fadhlannuha/sistem-manajemen-gudang` | Sudah dibuat; pastikan tetap public |
 | Konfirmasi studi kasus ke dosen/asisten | Belum | Konfirmasi secepatnya (first come, first served) |
 | Tanggal deadline | Ikuti dashboard | Catat di kalender; target submit H-1 |
-| Nama kelompok di file PDF | Solo | Gunakan nama sendiri; ikuti format dosen |
+| Nama kelompok di file PDF | 2 anggota: Fadhlan Nuha Mukhlishin & Najib Arafi | Ikuti format dosen; sertakan kedua NIM |
 
 ## 11. Cara Memakai Dokumen Ini
 
