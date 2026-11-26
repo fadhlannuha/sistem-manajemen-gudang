@@ -138,7 +138,7 @@ Legenda: ✅ selesai/tersedia · ⬜ belum · 🔍 perlu verifikasi · N/A tidak
 | 5.7 | Rollback | 1+ skenario kritis | ✅ (`RollbackTest` dua item) |
 | 5.8 | Validasi | minimal 1 gagal per form | ✅ (Auth + Product + Supplier + Inventory + Reporting) |
 | 5.9 | API | 6+ skenario | ✅ (API Auth + receipt 201 + issue 409 + 401) |
-| 5.10 | Semua test hijau | `php artisan test` | ✅ (130 test, 606 assertions per 2026-11-19) |
+| 5.10 | Semua test hijau | `php artisan test` | ✅ (137 test, 750 assertions per 2026-11-19) |
 | 5.11 | Pint bersih | `vendor/bin/pint --test` | ✅ |
 | 5.12 | Uji manual semua halaman | checklist `TESTING.md` | ✅ (Auth + Product + Supplier + Inventory + Reporting, HTTP 200/403 sesuai role) |
 | 5.13 | Screenshot test/hasil | 30 bukti | ⬜ |
@@ -247,6 +247,6 @@ git status
 - Bukti M2: `migrate:fresh --seed` menghasilkan 5 kategori, 5 satuan, dan 20 produk; 32 test Product lulus; halaman `/products`, `/categories`, `/units` sudah diuji manual dan memuat CSS ter-build.
 - Bukti M3: `migrate:fresh --seed` menghasilkan 4 termin dan 5 pemasok; 22 test Supplier lulus; halaman `/suppliers` dan `/payment-terms` sudah diuji manual; total suite 87 test / 402 assertions; Pint bersih.
 - Bukti M4: `migrate:fresh --seed` menghasilkan 20 saldo, 3 penerimaan (16 item), 2 pengeluaran (7 item), dan 23 movement; 24 feature test Inventory + 6 unit test lulus; total suite 118 test / 553 assertions; halaman saldo, stok masuk, stok keluar, dan kartu stok sudah diuji manual (HTTP 200 + CSS ter-build); Pint bersih. PRD-0005 dan empat produk Konsumsi menjadi contoh stok rendah.
-- Bukti M5: `migrate:fresh --seed` mengisi 6 activity log stok (3 `stock.received`, 2 `stock.issued`, 1 `stock.low`); 11 feature test Reporting + AUTH-13 lulus; total suite 130 test / 606 assertions; dashboard admin/staff HTTP 200, `/activity` staff 403 dan admin 200; Pint bersih. Reporting hanya memakai contract/DTO/event dan model `ActivityLog` sendiri.
+- Bukti M5: `migrate:fresh --seed` mengisi 6 activity log stok (3 `stock.received`, 2 `stock.issued`, 1 `stock.low`); 11 feature test Reporting + AUTH-13 lulus; total suite 137 test / 750 assertions; dashboard admin/staff HTTP 200, `/activity` staff 403 dan admin 200; Pint bersih. Reporting hanya memakai contract/DTO/event dan model `ActivityLog` sendiri.
 - Setelah coding, perbarui dokumen ini dan `README.md` dengan status sebenarnya.
 - Jangan menandai ✅ tanpa bukti (screenshot/test/commit).

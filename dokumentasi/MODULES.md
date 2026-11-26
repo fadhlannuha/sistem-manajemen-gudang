@@ -626,7 +626,7 @@ app/Modules/Reporting/
 - [x] Reporting tidak mengimpor model Product/Inventory/User.
 - [x] Log tidak menyimpan data sensitif.
 
-> **Status M5 (2026-11-19):** seluruh acceptance Reporting terpenuhi. `RecordActivityLog` mendengarkan 10 event (user, product, supplier, stock) dan dibungkus `try/catch` + `Log::warning` agar logging tidak menggagalkan operasi utama. Dashboard memakai `ProductCatalogContract`, `SupplierDirectoryContract`, dan `InventoryQueryContract`; activity page memakai `ActivityFilterRequest`, `ActivityLogPolicy`, dan route `role:admin`. Bukti: 11 feature test Reporting + AUTH-13 lulus, total suite 130 test / 606 assertions.
+> **Status M5 (2026-11-19):** seluruh acceptance Reporting terpenuhi. `RecordActivityLog` mendengarkan 10 event (user, product, supplier, stock) dan dibungkus `try/catch` + `Log::warning` agar logging tidak menggagalkan operasi utama. Dashboard memakai `ProductCatalogContract`, `SupplierDirectoryContract`, dan `InventoryQueryContract`; activity page memakai `ActivityFilterRequest`, `ActivityLogPolicy`, dan route `role:admin`. Bukti: 11 feature test Reporting + AUTH-13 lulus, total suite 137 test / 750 assertions.
 
 ## 7. Route Global dan Middleware
 
