@@ -17,7 +17,7 @@ class SupplierSeeder extends Seeder
             $paymentTerms = $this->seedPaymentTerms();
 
             foreach ($this->suppliers() as $data) {
-                Supplier::query()->withTrashed()->updateOrCreate(
+                $supplier = Supplier::query()->withTrashed()->updateOrCreate(
                     ['code' => $data['code']],
                     [
                         'name' => $data['name'],
@@ -28,6 +28,10 @@ class SupplierSeeder extends Seeder
                         'payment_term_id' => $paymentTerms[$data['payment_term']]->id,
                     ],
                 );
+
+                if ($supplier->trashed()) {
+                    $supplier->restore();
+                }
             }
         });
     }

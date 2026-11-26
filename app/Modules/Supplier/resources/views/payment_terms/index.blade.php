@@ -24,7 +24,7 @@
                         <tr>
                             <th class="px-4 py-3">Nama</th>
                             <th class="px-4 py-3 text-right">Jatuh Tempo</th>
-                            <th class="px-4 py-3 text-right">Pemasok Aktif</th>
+                            <th class="px-4 py-3 text-right">Pemasok (aktif/total)</th>
                             <th class="px-4 py-3 text-right">Aksi</th>
                         </tr>
                     </thead>
@@ -33,7 +33,7 @@
                             <tr class="hover:bg-gray-50">
                                 <td class="px-4 py-3 font-medium text-gray-900">{{ $paymentTerm->name }}</td>
                                 <td class="whitespace-nowrap px-4 py-3 text-right text-gray-700">{{ $paymentTerm->days }} hari</td>
-                                <td class="whitespace-nowrap px-4 py-3 text-right text-gray-700">{{ $paymentTerm->suppliers_count }}</td>
+                                <td class="whitespace-nowrap px-4 py-3 text-right text-gray-700">{{ $paymentTerm->suppliers_count }} / {{ $paymentTerm->all_suppliers_count }}</td>
                                 <td class="whitespace-nowrap px-4 py-3 text-right">
                                     @role('admin')
                                         <div class="flex items-center justify-end gap-2">

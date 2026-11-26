@@ -22,6 +22,7 @@ return new class extends Migration
             $table->softDeletes();
             $table->timestamps();
 
+            $table->index('deleted_at');
             $table->index('name');
             $table->index('payment_term_id');
         });

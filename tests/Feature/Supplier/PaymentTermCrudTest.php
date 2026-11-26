@@ -117,6 +117,12 @@ class PaymentTermCrudTest extends TestCase
 
         $response->assertSessionHasErrors('delete');
         $this->assertDatabaseHas('payment_terms', ['id' => $paymentTerm->id]);
+
+        $this->actingAs($admin)
+            ->get(route('payment-terms.index'))
+            ->assertOk()
+            ->assertSee('Pemasok (aktif/total)')
+            ->assertSee('0 / 1');
     }
 
     public function test_staff_cannot_modify_payment_terms(): void
