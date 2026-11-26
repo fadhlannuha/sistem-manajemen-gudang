@@ -33,7 +33,7 @@ final class DashboardService
      */
     public function summary(): array
     {
-        $lowStock = $this->inventory->lowStock(10);
+        $lowStock = $this->inventory->lowStock();
         $lowStockProducts = $this->products->findMany(array_map(
             static fn (LowStockView $view): int => $view->productId,
             $lowStock,

@@ -1,6 +1,9 @@
 <?php
 
 use App\Modules\Auth\Http\Middleware\EnsureUserHasRole;
+use App\Modules\Inventory\Exceptions\InsufficientStockException;
+use App\Modules\Product\Exceptions\ProductUnavailableException;
+use App\Modules\Supplier\Exceptions\SupplierUnavailableException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -22,6 +25,13 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->redirectUsersTo('/dashboard');
     })
     ->withExceptions(function (Exceptions $exceptions): void {
+        // Error bisnis sudah punya render() sendiri; jangan mengisi log dengan noise.
+        $exceptions->dontReport([
+            InsufficientStockException::class,
+            ProductUnavailableException::class,
+            SupplierUnavailableException::class,
+        ]);
+
         $exceptions->shouldRenderJsonWhen(
             fn (Request $request) => $request->is('api/*') || $request->expectsJson(),
         );
