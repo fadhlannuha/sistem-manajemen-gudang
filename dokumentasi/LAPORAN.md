@@ -11,13 +11,13 @@ Dokumen ini adalah kerangka laporan UTS, daftar bukti screenshot, storyboard vid
 | Dosen | Hastari Utama, M.Cs |
 | Semester | Ganjil 2026/2027 |
 | Kelas | `<isi kelas>` |
-| Anggota | Fadhlan Nuha M. — 25.01.5292 |
+| Anggota | Fadhlan Nuha Mukhlishin — 25.01.5292; Najib Arafi — 25.01.5296 |
 | Studi kasus | 4. Sistem Manajemen Gudang (Warehouse) |
 | Repository | `https://github.com/fadhlannuha/sistem-manajemen-gudang` |
 | Video | `menyusul` (YouTube unlisted) |
 | Tanggal submit | `<tanggal>` |
 
-**Nama file PDF:** `UTS_BackendDevelopment_<Kelas>_FadhlanNuhaM.pdf`
+**Nama file PDF:** `UTS_BackendDevelopment_<Kelas>_FadhlanNajib.pdf`
 Sesuaikan format dengan instruksi dosen; jangan memakai spasi/karakter aneh.
 
 ## 2. Struktur Laporan (Wajib)
@@ -230,13 +230,14 @@ Minimal:
 
 **3.12 Pembagian Tugas**
 
-Karena solo:
+Pembagian tugas mengikuti riwayat commit aktual (`git log`) dan PR yang sudah di-merge:
 
-| Nama | NIM | Tugas | Persentase |
-|---|---|---|---|
-| Fadhlan Nuha M. | 25.01.5292 | Seluruh analisis, desain, implementasi, pengujian, laporan, video | 100% |
+| Nama | NIM | GitHub | Tugas | Persentase |
+|---|---|---|---|---|
+| Fadhlan Nuha Mukhlishin | 25.01.5292 | `@fadhlannuha` | M0 Fondasi Laravel 13 & Sanctum; M1 Auth & RBAC; implementasi awal modul inti; M4 Inventory (transaksi stok, lock, rollback); UI/layout; integrasi & review PR | 50% |
+| Najib Arafi | 25.01.5296 | `@najibarafi` | Audit & perbaikan M2 Product, M3 Supplier, M5 Reporting sesuai dokumentasi; test regresi (137 test / 750 assertions); dokumentasi tim & bukti M6–M7 | 50% |
 
-Jika kelak berkelompok, buat tabel per anggota dan sesuaikan dengan riwayat commit.
+Rincian bukti kontribusi: lima commit awal di `main` atas nama Fadhlan; empat commit perbaikan Najib pada PR #1 `fix/najib-modules-audit`; PR #2 `docs/team-and-evidence` untuk dokumentasi tim dan screenshot.
 
 ### BAB IV — Pengujian
 
@@ -323,14 +324,14 @@ Tabel (isi status setelah pengujian nyata; jangan menyalin "Lulus" tanpa bukti):
 
 1. Link repository GitHub (public).
 2. Link video YouTube (unlisted).
-3. Form peer assessment (solo).
+3. Form peer assessment (2 anggota).
 4. Daftar akun demo (tanpa password produksi).
 5. Perintah menjalankan aplikasi.
 6. Bukti tambahan (opsional).
 
 ## 3. Daftar Screenshot Wajib
 
-Simpan di `dokumentasi/screenshots/` dengan nama konsisten.
+Simpan di `dokumentasi/screenshots/` dengan nama konsisten. Saat ini sudah tersedia 24 screenshot UI/validasi/RBAC di folder tersebut (lihat `README.md` di dalam folder); screenshot kode, API, dan hasil test masih perlu dilengkapi agar daftar di bawah lengkap.
 
 | No | Nama file | Yang diambil |
 |---|---|---|
@@ -458,7 +459,7 @@ Opsi:
 - **Markdown → PDF:** gunakan Typora, VS Code Markdown PDF, atau Pandoc:
 
 ```bash
-pandoc laporan.md -o UTS_BackendDevelopment_Kelas_FadhlanNuhaM.pdf \
+pandoc laporan.md -o UTS_BackendDevelopment_Kelas_FadhlanNajib.pdf \
   --pdf-engine=xelatex \
   -V geometry:margin=2.5cm \
   -V fontsize=11pt
@@ -468,13 +469,14 @@ pandoc laporan.md -o UTS_BackendDevelopment_Kelas_FadhlanNuhaM.pdf \
 - Cek ukuran file (hindari > 20 MB jika dashboard membatasi).
 - Beri nama file sesuai format.
 
-## 8. Form Peer Assessment (Solo)
+## 8. Form Peer Assessment (2 Anggota)
 
-Isi sesuai instruksi dosen. Contoh:
+Isi sesuai instruksi dosen. Contoh ringkas (nilai akhir mengikuti form resmi):
 
 | Nama | NIM | Peran | Kontribusi | Nilai diri |
 |---|---|---|---|---|
-| Fadhlan Nuha M. | 25.01.5292 | Semua peran | Analisis, desain, implementasi, test, laporan, video | 100% |
+| Fadhlan Nuha Mukhlishin | 25.01.5292 | Arsitektur, Auth/RBAC, Inventory, integrasi | Fondasi Laravel 13 & Sanctum, modul Auth & RBAC, transaksi stok/lock/rollback, UI, review PR | 50% |
+| Najib Arafi | 25.01.5296 | Audit kualitas, master data & reporting, dokumentasi | Audit/perbaikan Product, Supplier, Reporting; test regresi; sinkronisasi dokumentasi tim & screenshot | 50% |
 
 Lampirkan form resmi jika disediakan dosen. Jangan memalsukan kontribusi.
 

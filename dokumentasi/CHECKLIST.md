@@ -1,6 +1,6 @@
 # Checklist Kepatuhan UTS
 
-Gunakan dokumen ini sebagai kontrol terakhir sebelum submit. Kolom **Status** mengacu pada bukti nyata. M0 (fondasi), M1 (Auth & RBAC), M2 (Product), M3 (Supplier), M4 (Inventory), dan M5 (Reporting) sudah selesai. Setelah coding, ubah status menjadi ✅ hanya jika bukti nyata ada.
+Gunakan dokumen ini sebagai kontrol terakhir sebelum submit. Kolom **Status** mengacu pada bukti nyata. M0 (fondasi), M1 (Auth & RBAC), M2 (Product), M3 (Supplier), M4 (Inventory), dan M5 (Reporting) sudah selesai; dokumentasi tim & bukti (M6/M7) dikerjakan oleh **Fadhlan Nuha Mukhlishin (25.01.5292)** dan **Najib Arafi (25.01.5296)**. Ubah status menjadi ✅ hanya jika bukti nyata ada; PDF dan video belum dibuat sehingga tetap ⬜.
 
 Legenda: ✅ selesai/tersedia · ⬜ belum · 🔍 perlu verifikasi · N/A tidak berlaku.
 
@@ -55,7 +55,7 @@ Legenda: ✅ selesai/tersedia · ⬜ belum · 🔍 perlu verifikasi · N/A tidak
 | 1.4.3 | Custom exception minimal 1 | 3 exception | Kode + screenshot | ✅ (`ProductUnavailableException`, `SupplierUnavailableException`, `InsufficientStockException` dipakai + diuji) |
 | 1.4.4 | Pesan error informatif di view | `$errors`, old input, alert | Screenshot validasi | ✅ (Auth + Product + Supplier + Inventory) |
 | 1.4.5 | Error API jelas | status + `code` + `meta` | Screenshot/Postman | ✅ (API 409 `INSUFFICIENT_STOCK` + meta; 422 unavailable; 401 auth) |
-| 1.4.6 | Error 401/403/404/419/429/500 | Halaman/JSON ramah | Screenshot | 🟡 (view 403/404/419/429/500 ada; screenshot menyusul) |
+| 1.4.6 | Error 401/403/404/419/429/500 | Halaman/JSON ramah | Screenshot | 🟡 (view tersedia; `22-rbac-403` & `23-rbac-403-activity` ada; 404/419/429/500 belum) |
 | 1.4.7 | Validasi stok di service | Di dalam transaksi | Kode `IssueStockService` | ✅ (`lockForUpdate()` + cek saldo + rollback, diuji) |
 | 1.4.8 | Tidak ada SQL/stack trace ke user | 0 | Review + screenshot | ⬜ |
 
@@ -64,8 +64,8 @@ Legenda: ✅ selesai/tersedia · ⬜ belum · 🔍 perlu verifikasi · N/A tidak
 | # | Ketentuan | Target | Bukti | Status |
 |---|---|---|---|---|
 | 1.5.1 | Repo public | URL aktif | Link di laporan/README | ✅ (repo public, HTTP 200) |
-| 1.5.2 | Commit berkala & deskriptif | ≥ 30 commit | `git log --oneline --graph` | ⬜ |
-| 1.5.3 | Riwayat menunjukkan kontribusi | Solo, bertahap | Git graph + tabel tugas | ⬜ |
+| 1.5.2 | Commit berkala & deskriptif | ≥ 30 commit | `git log --oneline --graph` | ⬜ (11 commit saat PR #2; target belum tercapai) |
+| 1.5.3 | Riwayat menunjukkan kontribusi | 2 anggota, bertahap | Git graph + tabel tugas di `README.md`, `PLAN.md`, `LAPORAN.md` | ✅ (commit Fadhlan M0/M1/M4; 4 commit Najib di PR #1) |
 | 1.5.4 | Tidak ada file sensitif | `.env`, DB, token | `.gitignore` + scan | ✅ (`.env`, `database/*.sqlite`, `vendor` diabaikan) |
 | 1.5.5 | Tag rilis | `v1.0-uts` | `git tag` | ⬜ |
 
@@ -73,14 +73,14 @@ Legenda: ✅ selesai/tersedia · ⬜ belum · 🔍 perlu verifikasi · N/A tidak
 
 | # | Fitur | Detail | Bukti | Status |
 |---|---|---|---|---|
-| 2.1 | CRUD Barang | index/create/store/show/edit/update/delete (soft) | Screenshot + test | 🟡 (kode + 32 test lulus; screenshot menyusul) |
-| 2.2 | CRUD Pemasok | index/create/store/show/edit/update/delete (soft) | Screenshot + test | 🟡 (kode + test lulus; screenshot menyusul) |
-| 2.3 | Kategori & Satuan | CRUD + relasi + delete guard | Screenshot + test | 🟡 (kode + test lulus; screenshot menyusul) |
-| 2.4 | Termin | CRUD + relasi O2M | Screenshot + test | 🟡 (kode + test lulus; screenshot menyusul) |
-| 2.5 | Stok Masuk | dokumen + item + saldo + movement | Screenshot + test | ⬜ |
-| 2.6 | Stok Keluar | dokumen + item + validasi stok | Screenshot + test | ⬜ |
-| 2.7 | Validasi stok | stok kurang → exception, rollback | Test + screenshot | ⬜ |
-| 2.8 | Kartu Stok | filter produk/tanggal; saldo setelah | Screenshot + test | ⬜ |
+| 2.1 | CRUD Barang | index/create/store/show/edit/update/delete (soft) | Screenshot + test | ✅ (`03-produk-index`, `04-produk-form`, `16-detail-barang`; 32 test) |
+| 2.2 | CRUD Pemasok | index/create/store/show/edit/update/delete (soft) | Screenshot + test | ✅ (`05-pemasok`, `19-detail-pemasok`; 22 test Supplier) |
+| 2.3 | Kategori & Satuan | CRUD + relasi + delete guard | Screenshot + test | ✅ (`13-kategori`, `14-satuan`; delete guard diuji) |
+| 2.4 | Termin | CRUD + relasi O2M | Screenshot + test | ✅ (`15-termin`; delete guard diuji) |
+| 2.5 | Stok Masuk | dokumen + item + saldo + movement | Screenshot + test | ✅ (`06-stok-masuk`, `11-stok-masuk-form`, `17-detail-stok-masuk`; 24 test Inventory) |
+| 2.6 | Stok Keluar | dokumen + item + validasi stok | Screenshot + test | ✅ (`07-stok-keluar`, `12-stok-keluar-form`, `18-detail-stok-keluar`) |
+| 2.7 | Validasi stok | stok kurang → exception, rollback | Test + screenshot | 🟡 (test rollback & exception hijau; screenshot error 409/stok kurang belum ada) |
+| 2.8 | Kartu Stok | filter produk/tanggal; saldo setelah | Screenshot + test | ✅ (`09-kartu-stok`; 24 test Inventory) |
 | 2.9 | Saldo Stok | daftar saldo & status rendah | Screenshot | ✅ (`/inventory/balances` + filter stok rendah, diuji) |
 | 2.10 | RBAC Admin vs Staff | hak berbeda | Screenshot 403 + test | ✅ (Auth + Product + Supplier + Inventory + Activity, diuji 401/403/200) |
 | 2.11 | Dashboard | ringkasan & low stock | Screenshot | ✅ (total barang/pemasok, stok rendah, transaksi & aktivitas terakhir) |
@@ -123,7 +123,7 @@ Legenda: ✅ selesai/tersedia · ⬜ belum · 🔍 perlu verifikasi · N/A tidak
 | 4.11 | `LAPORAN.md` | ✅ | ⬜ | ✅ (rencana) |
 | 4.12 | `CHECKLIST.md` | ✅ | ⬜ | ✅ (rencana) |
 | 4.13 | Diagram sesuai schema aktual | ⬜ | ⬜ | ⬜ |
-| 4.14 | Screenshot lengkap | ⬜ | ⬜ | ⬜ |
+| 4.14 | Screenshot lengkap | 24 screenshot UI tersedia | ⬜ | 🟡 (kode, API, test, PDF/video belum) |
 
 ## 5. Pengujian
 
@@ -138,10 +138,10 @@ Legenda: ✅ selesai/tersedia · ⬜ belum · 🔍 perlu verifikasi · N/A tidak
 | 5.7 | Rollback | 1+ skenario kritis | ✅ (`RollbackTest` dua item) |
 | 5.8 | Validasi | minimal 1 gagal per form | ✅ (Auth + Product + Supplier + Inventory + Reporting) |
 | 5.9 | API | 6+ skenario | ✅ (API Auth + receipt 201 + issue 409 + 401) |
-| 5.10 | Semua test hijau | `php artisan test` | ✅ (137 test, 750 assertions per 2026-11-19) |
+| 5.10 | Semua test hijau | `php artisan test` | ✅ (137 test, 750 assertions, diverifikasi 2026-11-26) |
 | 5.11 | Pint bersih | `vendor/bin/pint --test` | ✅ |
 | 5.12 | Uji manual semua halaman | checklist `TESTING.md` | ✅ (Auth + Product + Supplier + Inventory + Reporting, HTTP 200/403 sesuai role) |
-| 5.13 | Screenshot test/hasil | 30 bukti | ⬜ |
+| 5.13 | Screenshot test/hasil | 30 bukti | 🟡 (24 screenshot UI/validasi/RBAC; target 30 belum lengkap) |
 
 ## 6. Laporan dan Video
 
@@ -159,7 +159,7 @@ Legenda: ✅ selesai/tersedia · ⬜ belum · 🔍 perlu verifikasi · N/A tidak
 | 6.10 | PDF nama benar | `UTS_BackendDevelopment_<Kelas>_<Nama>.pdf` | ⬜ |
 | 6.11 | Upload Waskita | Bukti submit | ⬜ |
 | 6.12 | Repo public | URL benar | ⬜ |
-| 6.13 | Peer assessment | Solo, jujur | ⬜ |
+| 6.13 | Peer assessment | 2 anggota, jujur | ⬜ (form PDF belum dibuat; tabel contoh ada di `LAPORAN.md`) |
 
 ## 7. Pemetaan Rubrik Penilaian
 
