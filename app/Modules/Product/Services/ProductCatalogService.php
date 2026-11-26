@@ -57,7 +57,9 @@ final class ProductCatalogService implements ProductCatalogContract
      */
     public function search(string $term = '', int $limit = 20): array
     {
-        $limit = max(1, min($limit, 100));
+        // Inventory memakai search('', 1000) untuk menghitung seluruh katalog
+        // saat menentukan stok rendah, jadi batasnya harus cukup besar.
+        $limit = max(1, min($limit, 1000));
         $term = trim($term);
 
         $query = Product::query()->with('unit:id,name,code');

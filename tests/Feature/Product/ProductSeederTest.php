@@ -9,6 +9,7 @@ use App\Modules\Product\Models\Category;
 use App\Modules\Product\Models\Product;
 use App\Modules\Product\Models\Unit;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
 class ProductSeederTest extends TestCase
@@ -55,5 +56,16 @@ class ProductSeederTest extends TestCase
 
         $this->assertSame(20, Product::query()->count());
         $this->assertDatabaseCount('category_product', 23);
+    }
+
+    public function test_products_table_has_indexes_required_by_database_documentation(): void
+    {
+        $indexes = collect(DB::select("PRAGMA index_list('products')"))
+            ->pluck('name')
+            ->all();
+
+        $this->assertContains('products_deleted_at_index', $indexes);
+        $this->assertContains('products_name_index', $indexes);
+        $this->assertContains('products_unit_id_index', $indexes);
     }
 }

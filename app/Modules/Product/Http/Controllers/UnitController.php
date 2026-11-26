@@ -18,6 +18,7 @@ class UnitController extends Controller
     {
         $units = Unit::query()
             ->withCount('products')
+            ->withCount(['products as all_products_count' => fn ($query) => $query->withTrashed()])
             ->orderBy('name')
             ->paginate(15);
 

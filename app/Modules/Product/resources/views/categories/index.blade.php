@@ -25,7 +25,7 @@
                             <th class="px-4 py-3">Nama</th>
                             <th class="px-4 py-3">Slug</th>
                             <th class="px-4 py-3">Deskripsi</th>
-                            <th class="px-4 py-3 text-right">Produk Aktif</th>
+                            <th class="px-4 py-3 text-right">Produk (aktif/total)</th>
                             <th class="px-4 py-3 text-right">Aksi</th>
                         </tr>
                     </thead>
@@ -35,7 +35,7 @@
                                 <td class="px-4 py-3 font-medium text-gray-900">{{ $category->name }}</td>
                                 <td class="px-4 py-3 font-mono text-xs text-gray-600">{{ $category->slug }}</td>
                                 <td class="max-w-xs px-4 py-3 text-gray-600">{{ $category->description ?: '—' }}</td>
-                                <td class="whitespace-nowrap px-4 py-3 text-right text-gray-700">{{ $category->products_count }}</td>
+                                <td class="whitespace-nowrap px-4 py-3 text-right text-gray-700">{{ $category->products_count }} / {{ $category->all_products_count }}</td>
                                 <td class="whitespace-nowrap px-4 py-3 text-right">
                                     @role('admin')
                                         <div class="flex items-center justify-end gap-2">
