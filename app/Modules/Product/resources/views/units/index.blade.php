@@ -24,7 +24,7 @@
                         <tr>
                             <th class="px-4 py-3">Nama</th>
                             <th class="px-4 py-3">Kode</th>
-                            <th class="px-4 py-3 text-right">Produk Aktif</th>
+                            <th class="px-4 py-3 text-right">Produk (aktif/total)</th>
                             <th class="px-4 py-3 text-right">Aksi</th>
                         </tr>
                     </thead>
@@ -33,7 +33,7 @@
                             <tr class="hover:bg-gray-50">
                                 <td class="px-4 py-3 font-medium text-gray-900">{{ $unit->name }}</td>
                                 <td class="px-4 py-3 font-mono text-xs font-semibold text-gray-600">{{ $unit->code }}</td>
-                                <td class="whitespace-nowrap px-4 py-3 text-right text-gray-700">{{ $unit->products_count }}</td>
+                                <td class="whitespace-nowrap px-4 py-3 text-right text-gray-700">{{ $unit->products_count }} / {{ $unit->all_products_count }}</td>
                                 <td class="whitespace-nowrap px-4 py-3 text-right">
                                     @role('admin')
                                         <div class="flex items-center justify-end gap-2">

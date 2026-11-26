@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Supplier;
 
+use App\Modules\Supplier\Contracts\SupplierDirectoryContract;
 use App\Modules\Supplier\Database\Seeders\SupplierSeeder;
 use App\Modules\Supplier\Models\PaymentTerm;
 use App\Modules\Supplier\Models\Supplier;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
 class SupplierSeederTest extends TestCase
@@ -45,5 +47,46 @@ class SupplierSeederTest extends TestCase
 
         $this->assertSame(4, PaymentTerm::query()->count());
         $this->assertSame(5, Supplier::query()->count());
+    }
+
+    public function test_supplier_seeder_restores_deactivated_suppliers(): void
+    {
+        $this->seed(SupplierSeeder::class);
+
+        Supplier::query()->where('code', 'SUP-001')->firstOrFail()->delete();
+
+        $this->assertSame(4, Supplier::query()->count());
+
+        $this->seed(SupplierSeeder::class);
+
+        $this->assertSame(5, Supplier::query()->count());
+        $this->assertNotSoftDeleted('suppliers', ['code' => 'SUP-001']);
+    }
+
+    public function test_supplier_factory_can_create_deactivated_supplier(): void
+    {
+        $supplier = Supplier::factory()->deactivated()->create();
+
+        $this->assertSoftDeleted('suppliers', ['id' => $supplier->id]);
+        $this->assertNull($this->app->make(SupplierDirectoryContract::class)->find($supplier->id));
+    }
+
+    public function test_payment_term_factory_uses_documented_day_range(): void
+    {
+        foreach (PaymentTerm::factory()->count(30)->make() as $paymentTerm) {
+            $this->assertGreaterThanOrEqual(0, $paymentTerm->days);
+            $this->assertLessThanOrEqual(30, $paymentTerm->days);
+        }
+    }
+
+    public function test_suppliers_table_has_indexes_required_by_database_documentation(): void
+    {
+        $indexes = collect(DB::select("PRAGMA index_list('suppliers')"))
+            ->pluck('name')
+            ->all();
+
+        $this->assertContains('suppliers_deleted_at_index', $indexes);
+        $this->assertContains('suppliers_name_index', $indexes);
+        $this->assertContains('suppliers_payment_term_id_index', $indexes);
     }
 }

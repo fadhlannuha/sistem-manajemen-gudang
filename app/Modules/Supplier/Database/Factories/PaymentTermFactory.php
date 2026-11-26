@@ -22,7 +22,7 @@ class PaymentTermFactory extends Factory
     {
         return [
             'name' => Str::title(fake()->unique()->words(2, true)),
-            'days' => fake()->randomElement([0, 7, 14, 30, 45]),
+            'days' => fake()->randomElement([0, 7, 14, 30]),
         ];
     }
 }

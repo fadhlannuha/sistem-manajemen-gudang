@@ -30,4 +30,14 @@ class SupplierFactory extends Factory
             'payment_term_id' => PaymentTerm::factory(),
         ];
     }
+
+    /**
+     * Pemasok nonaktif dipakai untuk menguji contract histori dan delete guard.
+     */
+    public function deactivated(): static
+    {
+        return $this->state(fn (array $attributes): array => [
+            'deleted_at' => now(),
+        ]);
+    }
 }

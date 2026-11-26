@@ -117,4 +117,18 @@ class DashboardTest extends TestCase
             }
         }
     }
+
+    public function test_dashboard_counts_low_stock_beyond_the_first_hundred_products(): void
+    {
+        $staff = User::factory()->staff()->create();
+
+        // Tanpa stock_balance, saldo dibaca sebagai 0 sehingga semua masuk stok rendah.
+        Product::factory()->count(101)->create(['min_stock' => 10]);
+
+        $response = $this->actingAs($staff)->get(route('dashboard.index'));
+
+        $response->assertOk();
+        $response->assertViewHas('lowStockCount', 101);
+        $this->assertCount(20, $response->viewData('lowStock'));
+    }
 }

@@ -323,4 +323,15 @@ class ProductCrudTest extends TestCase
                 && $event->sku === 'PRD-6000',
         );
     }
+
+    public function test_contract_search_can_scan_the_whole_catalog_for_low_stock(): void
+    {
+        $unit = Unit::factory()->create();
+        Product::factory()->count(101)->create(['unit_id' => $unit->id]);
+
+        $contract = $this->app->make(ProductCatalogContract::class);
+
+        // InventoryQueryService memakai search('', 1000) untuk lowStock().
+        $this->assertCount(101, $contract->search('', 1000));
+    }
 }

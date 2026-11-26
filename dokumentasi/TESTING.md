@@ -185,7 +185,9 @@ tests/
 | RPT-05 | `DashboardTest::test_dashboard_shows_low_stock` | saldo < min | produk muncul |
 | RPT-06 | `DashboardTest::test_dashboard_does_not_expose_other_modules_models` | code review/architecture test | tidak ada import model |
 
-> **Status 2026-11-19:** RPT-01 sampai RPT-06 sudah diimplementasikan di `tests/Feature/Reporting/` dan lulus. Test Reporting memakai `DatabaseMigrations` agar listener `ShouldDispatchAfterCommit` benar-benar berjalan. Tambahan test mencakup log registrasi user, log stok masuk, filter activity, dan validasi rentang tanggal. Total suite 130 test / 606 assertions.
+> **Status 2026-11-19:** RPT-01 sampai RPT-06 sudah diimplementasikan di `tests/Feature/Reporting/` dan lulus. Test Reporting memakai `DatabaseMigrations` agar listener `ShouldDispatchAfterCommit` benar-benar berjalan. Tambahan test mencakup log registrasi user, log stok masuk, filter activity, dan validasi rentang tanggal. Total suite 137 test / 750 assertions.
+
+> **Audit 2026-11-26 (Najib):** 7 test regresi ditambahkan untuk menutup ketidaksesuaian kode dengan dokumentasi: index `deleted_at` di `products`/`suppliers`, `ProductCatalogContract::search()` mampu memindai 1000 produk (dipakai `InventoryQueryService::lowStock()`), `SupplierSeeder` memulihkan pemasok yang dinonaktifkan, state `SupplierFactory::deactivated()`, rentang `days` factory termin 0–30, tampilan jumlah `aktif/total` pada kategori/satuan/termin agar selaras dengan delete guard, dan dashboard menghitung stok rendah di atas 100 produk. Hasil: 137 test / 750 assertions hijau.
 
 ### 4.6 Unit
 

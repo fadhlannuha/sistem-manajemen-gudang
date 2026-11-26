@@ -18,6 +18,7 @@ class PaymentTermController extends Controller
     {
         $paymentTerms = PaymentTerm::query()
             ->withCount('suppliers')
+            ->withCount(['suppliers as all_suppliers_count' => fn ($query) => $query->withTrashed()])
             ->orderBy('days')
             ->orderBy('name')
             ->paginate(15);

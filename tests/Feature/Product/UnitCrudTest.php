@@ -106,6 +106,12 @@ class UnitCrudTest extends TestCase
 
         $response->assertSessionHasErrors('delete');
         $this->assertDatabaseHas('units', ['id' => $unit->id]);
+
+        $this->actingAs($admin)
+            ->get(route('units.index'))
+            ->assertOk()
+            ->assertSee('Produk (aktif/total)')
+            ->assertSee('0 / 1');
     }
 
     public function test_staff_cannot_modify_units(): void

@@ -132,6 +132,12 @@ class CategoryCrudTest extends TestCase
 
         $response->assertSessionHasErrors('delete');
         $this->assertDatabaseHas('categories', ['id' => $category->id]);
+
+        $this->actingAs($admin)
+            ->get(route('categories.index'))
+            ->assertOk()
+            ->assertSee('Produk (aktif/total)')
+            ->assertSee('0 / 1');
     }
 
     public function test_staff_cannot_modify_categories(): void
