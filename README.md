@@ -6,7 +6,7 @@ Aplikasi manajemen gudang (warehouse) untuk UTS mata kuliah Backend Development 
 - **Anggota:**
   - Fadhlan Nuha Mukhlishin (`25.01.5292`)
   - Najib Arafi (`25.01.5296`)
-- **Video demo (YouTube, unlisted):** *(menyusul)*
+- **Video demo (YouTube, unlisted):** https://youtu.be/HaxabsNk3yI
 
 ## Modul
 
@@ -77,5 +77,5 @@ vendor/bin/pint --test
 
 ## Dokumen Pengumpulan
 
-- **Video demo (YouTube, unlisted):** *(menyusul)*
+- **Video demo (YouTube, unlisted):** https://youtu.be/HaxabsNk3yI
 - **Laporan UTS:** diunggah terpisah dalam format PDF melalui Waskita
