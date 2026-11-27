@@ -43,7 +43,7 @@
             $userInitial = mb_strtoupper(mb_substr(auth()->user()->name, 0, 1));
         @endphp
 
-        <header class="sticky top-0 z-30 h-16 w-full border-b border-slate-200 bg-white/95 backdrop-blur-xs">
+        <header class="sticky top-0 z-30 h-16 w-full border-b border-slate-200 bg-white/95 backdrop-blur-xs lg:hidden">
             <div class="flex h-full w-full items-center justify-between gap-4 px-4 sm:px-6">
                 <div class="flex min-w-0 items-center gap-3">
                     <button
@@ -109,15 +109,25 @@
 
             <aside
                 id="app-sidebar"
-                class="fixed inset-y-0 left-0 z-40 flex w-64 -translate-x-full flex-col border-r border-slate-200 bg-white transition-transform duration-200 ease-out lg:sticky lg:top-16 lg:z-20 lg:h-[calc(100vh-4rem)] lg:translate-x-0"
+                class="fixed inset-y-0 left-0 z-40 flex w-64 -translate-x-full flex-col border-r border-slate-200 bg-white transition-transform duration-200 ease-out lg:sticky lg:top-0 lg:z-20 lg:h-screen lg:translate-x-0"
             >
-                <div class="flex h-16 items-center justify-between border-b border-slate-200 px-4 lg:hidden">
-                    <span class="text-sm font-bold text-slate-900">{{ config('app.name') }}</span>
+                <div class="flex h-16 items-center justify-between border-b border-slate-200 px-4">
+                    <a href="{{ route('dashboard.index') }}" class="flex items-center gap-2.5">
+                        <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-blue-700 text-white shadow-xs">
+                            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+                            </svg>
+                        </span>
+                        <div class="leading-tight">
+                            <span class="block text-sm font-bold tracking-tight text-slate-900">Sistem Manajemen</span>
+                            <span class="block text-[10px] font-semibold uppercase tracking-widest text-blue-700">Gudang</span>
+                        </div>
+                    </a>
                     <button
                         type="button"
                         id="sidebar-close-btn"
                         aria-label="Tutup menu navigasi"
-                        class="rounded-lg p-1.5 text-slate-500 hover:bg-slate-100 hover:text-slate-800"
+                        class="rounded-lg p-1.5 text-slate-500 hover:bg-slate-100 hover:text-slate-800 lg:hidden"
                     >
                         <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
@@ -212,12 +222,31 @@
                     @endrole
                 </nav>
 
-                <div class="border-t border-slate-200 px-4 py-3 sm:hidden">
-                    <p class="truncate text-sm font-medium text-slate-800">{{ auth()->user()->name }}</p>
-                    <div class="mt-1 flex flex-wrap gap-1">
-                        @foreach (auth()->user()->roles as $role)
-                            <span class="rounded-full bg-blue-50 px-2 py-0.5 text-xs font-semibold text-blue-700">{{ $role->label }}</span>
-                        @endforeach
+                <div class="border-t border-slate-200 p-3">
+                    <div class="flex items-center gap-2.5">
+                        <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-slate-100 text-xs font-bold text-slate-700 ring-1 ring-inset ring-slate-200">
+                            {{ $userInitial }}
+                        </span>
+                        <div class="min-w-0 flex-1">
+                            <p class="truncate text-sm font-semibold text-slate-800">{{ auth()->user()->name }}</p>
+                            <p class="truncate text-xs text-slate-500">{{ auth()->user()->email }}</p>
+                        </div>
+                    </div>
+                    <div class="mt-2.5 flex items-center justify-between gap-2">
+                        <div class="flex flex-wrap gap-1">
+                            @foreach (auth()->user()->roles as $role)
+                                <span class="rounded-full bg-blue-50 px-2.5 py-0.5 text-xs font-semibold text-blue-700">{{ $role->label }}</span>
+                            @endforeach
+                        </div>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button
+                                type="submit"
+                                class="rounded-lg border border-slate-200 bg-white px-2.5 py-1 text-xs font-semibold text-red-600 transition-colors hover:bg-red-50"
+                            >
+                                Logout
+                            </button>
+                        </form>
                     </div>
                 </div>
             </aside>
@@ -271,35 +300,19 @@
             })();
         </script>
     @else
-        <header class="sticky top-0 z-30 h-16 w-full border-b border-slate-200 bg-white/95 backdrop-blur-xs">
-            <div class="flex h-full w-full items-center justify-between gap-4 px-4 sm:px-6">
-                <a href="{{ url('/') }}" class="flex items-center gap-2.5 whitespace-nowrap">
-                    <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-blue-700 text-white shadow-xs">
-                        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
-                        </svg>
-                    </span>
-                    <span class="text-base font-bold tracking-tight text-slate-900">{{ config('app.name') }}</span>
-                </a>
-
-                <nav class="flex shrink-0 items-center gap-2 text-sm">
-                    <a
-                        href="{{ route('login') }}"
-                        class="rounded-lg px-3.5 py-2 font-medium transition-colors {{ request()->routeIs('login') ? 'bg-slate-100 text-slate-900 font-semibold' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900' }}"
-                    >
-                        Login
-                    </a>
-                    <a
-                        href="{{ route('register') }}"
-                        class="rounded-lg bg-blue-700 px-3.5 py-2 font-semibold text-white shadow-xs transition-colors hover:bg-blue-800"
-                    >
-                        Register
-                    </a>
-                </nav>
-            </div>
-        </header>
-
         <main class="flex flex-1 flex-col justify-center px-4 py-10 sm:px-6">
+            <div class="mx-auto mb-6 flex items-center justify-center gap-3">
+                <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-700 text-white shadow-xs">
+                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+                    </svg>
+                </span>
+                <div class="leading-tight">
+                    <span class="block text-base font-bold tracking-tight text-slate-900">Sistem Manajemen</span>
+                    <span class="block text-xs font-semibold uppercase tracking-widest text-blue-700">Gudang</span>
+                </div>
+            </div>
+
             <div class="mx-auto w-full max-w-md">
                 @if (session('status'))
                     <x-alert type="success" :message="session('status')" class="mb-5" />
@@ -322,6 +335,10 @@
             </div>
 
             @yield('content')
+
+            <p class="mt-8 text-center text-xs text-slate-400">
+                Sistem Manajemen Gudang · Laravel {{ app()->version() }} · PHP {{ PHP_VERSION }}
+            </p>
         </main>
     @endauth
 </body>

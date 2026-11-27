@@ -56,7 +56,7 @@
         </div>
 
         <div class="mt-4 rounded-xl border border-blue-200/80 bg-blue-50/70 p-4 text-sm text-blue-900">
-            <p class="font-semibold">Akun demo (setelah seeder dijalankan)</p>
+            <p class="font-semibold">Akun demo (hanya tampil di lingkungan lokal)</p>
             <div class="mt-2 space-y-1 text-xs sm:text-sm">
                 <p>Admin: <code class="rounded bg-white/80 px-1.5 py-0.5 font-mono text-xs text-blue-950">admin@warehouse.test</code> / <code class="rounded bg-white/80 px-1.5 py-0.5 font-mono text-xs text-blue-950">password</code></p>
                 <p>Staff: <code class="rounded bg-white/80 px-1.5 py-0.5 font-mono text-xs text-blue-950">staff@warehouse.test</code> / <code class="rounded bg-white/80 px-1.5 py-0.5 font-mono text-xs text-blue-950">password</code></p>
